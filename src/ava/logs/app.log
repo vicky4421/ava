@@ -1,0 +1,31 @@
+04/10/2026 04:03:40 PM | CRITICAL | models.py:load_hf_embedding_model:50 - Unexpected error initializing embedding model: 2 validation errors for HuggingFaceEmbeddings
+model_kwargs
+  Input should be a valid dictionary [type=dict_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/dict_type
+encode_kwargs
+  Input should be a valid dictionary [type=dict_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.13/v/dict_type
+04/10/2026 04:05:54 PM | CRITICAL | models.py:load_hf_embedding_model:50 - Unexpected error initializing embedding model: Could not import sentence_transformers python package. Please install it with `pip install sentence-transformers`.
+04/10/2026 04:28:34 PM | CRITICAL | models.py:load_hf_embedding_model:50 - Unexpected error initializing embedding model: SentenceTransformer.__init__() got an unexpected keyword argument 'model'
+04/10/2026 04:32:18 PM | INFO     | models.py:load_hf_embedding_model:41 - Loading embedding model: google/embeddinggemma-300m
+04/10/2026 04:32:31 PM | CRITICAL | models.py:load_hf_embedding_model:50 - Unexpected error initializing embedding model: 401 Client Error. (Request ID: Root=1-6ac23247-51490d374d797af579c05df3;0c8a410c-ce91-44f1-abf0-f08d918d07a5)
+
+Cannot access gated repo for url https://huggingface.co/google/embeddinggemma-300m/resolve/main/4_Normalize/config.json.
+Access to model google/embeddinggemma-300m is restricted. You must have access to it and be authenticated to access it. Please log in.
+04/10/2026 04:49:41 PM | INFO     | models.py:load_hf_embedding_model:41 - Loading embedding model: google/embeddinggemma-300m
+04/10/2026 04:49:54 PM | CRITICAL | models.py:load_hf_embedding_model:50 - Unexpected error initializing embedding model: 401 Client Error. (Request ID: Root=1-6ac2365a-589e08c97cb2b7e622f4d922;bf81e3d6-51fd-41ad-9fb9-711116dbe4dd)
+
+Cannot access gated repo for url https://huggingface.co/google/embeddinggemma-300m/resolve/main/4_Normalize/config.json.
+Access to model google/embeddinggemma-300m is restricted. You must have access to it and be authenticated to access it. Please log in.
+04/10/2026 04:53:46 PM | INFO     | models.py:load_hf_embedding_model:41 - Loading embedding model: google/embeddinggemma-300m
+04/10/2026 04:53:56 PM | CRITICAL | models.py:load_hf_embedding_model:50 - Unexpected error initializing embedding model: 401 Client Error. (Request ID: Root=1-6ac2374c-58a46d490f8dbb8d1891a50c;7f0b1e39-b77d-45ef-9472-430d05afcdc9)
+
+Cannot access gated repo for url https://huggingface.co/google/embeddinggemma-300m/resolve/main/4_Normalize/config.json.
+Access to model google/embeddinggemma-300m is restricted. You must have access to it and be authenticated to access it. Please log in.
+04/10/2026 04:55:32 PM | INFO     | models.py:load_hf_embedding_model:41 - Loading embedding model: google/embeddinggemma-300m
+04/10/2026 04:55:42 PM | CRITICAL | models.py:load_hf_embedding_model:50 - Unexpected error initializing embedding model: 401 Client Error. (Request ID: Root=1-6ac237b5-24e475ec6df7c15e133162b7;d59e6a56-9c64-4a9e-bef1-01c98bb76fd0)
+
+Cannot access gated repo for url https://huggingface.co/google/embeddinggemma-300m/resolve/main/4_Normalize/config.json.
+Access to model google/embeddinggemma-300m is restricted. You must have access to it and be authenticated to access it. Please log in.
+04/10/2026 04:56:55 PM | INFO     | models.py:load_hf_embedding_model:41 - Loading embedding model: google/embeddinggemma-300m
+04/10/2026 04:57:10 PM | INFO     | models.py:load_hf_embedding_model:41 - Loading embedding model: google/embeddinggemma-300m
