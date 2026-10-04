@@ -10,3 +10,4 @@ wheels/
 .env
 .env/
 venv/
+project_structure.txt

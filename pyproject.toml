@@ -7,7 +7,12 @@ authors = [
     { name = "vicky", email = "vicky210490@gmail.com" }
 ]
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "langchain>=1.4.3",
+    "langchain-chroma>=1.1.0",
+    "langchain-huggingface>=1.2.2",
+    "rich>=15.0.0",
+]
 
 [project.scripts]
 ava = "ava:main"
