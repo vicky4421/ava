@@ -3,8 +3,8 @@ from functools import lru_cache
 from langchain.chat_models import init_chat_model
 from langchain_huggingface import HuggingFaceEmbeddings
 
-from config.logger import get_logger
-from config.settings import settings
+from ava.config.logger import get_logger
+from ava.config.settings import settings
 
 logger = get_logger(log_name="app.log")
 
@@ -38,13 +38,13 @@ def load_hf_embedding_model(
     cache_dir = settings.huggingface_embedding_model_directory or cache_folder
 
     try:
+        logger.info(f"Loading embedding model: {emb_model}")
         embeddings = HuggingFaceEmbeddings(
             model_name=emb_model,
-            model_kwargs=model_kwargs,
-            encode_kwargs=encode_kwargs,
+            model_kwargs={"device": "cpu", "token": settings.hf_token or None},
+            encode_kwargs={"normalize_embeddings": True},
             cache_folder=cache_dir,
         )
-        logger.info(f"Embedding model initiated successfully: {emb_model}")
         return embeddings
     except Exception as e:
         logger.critical(f"Unexpected error initializing embedding model: {e}")
