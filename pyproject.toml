@@ -12,6 +12,7 @@ dependencies = [
     "langchain-chroma>=1.1.0",
     "langchain-huggingface>=1.2.2",
     "rich>=15.0.0",
+    "tavily-python>=0.8.4",
 ]
 
 [project.scripts]
