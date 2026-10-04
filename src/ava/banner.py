@@ -1,6 +1,8 @@
 import os
 import platform
 
+from ava.config.settings import settings
+
 # --- ANSI Color Codes ---
 RESET = "\033[0m"
 BOLD = "\033[1m"
@@ -31,8 +33,8 @@ def print_ava_banner(target_apk: str = "demo.apk", target_pkg: str = "com.target
         f"{C_KEY}Version{RESET}:      {C_VAL}0.1.0{RESET}",
         f"{C_KEY}Framework{RESET}:    {C_VAL}LangGraph (AsyncStateGraph){RESET}",
         f"{C_KEY}Persistence{RESET}:  {C_VAL}PostgreSQL Checkpointer{RESET}",
-        f"{C_KEY}LLM Engine{RESET}:   {C_VAL}Gemini 3.1 Flash-Lite{RESET}",
-        f"{C_KEY}Embeddings{RESET}:   {C_VAL}google/embeddinggemma-300m (Local CPU){RESET}",
+        f"{C_KEY}LLM Engine{RESET}:   {C_VAL}{settings.llm_model}{RESET}",
+        f"{C_KEY}Embeddings{RESET}:   {C_VAL}{settings.huggingface_embedding_model_name}(Local CPU){RESET}",
         f"{C_KEY}Router{RESET}:       {C_VAL}Jev (Deterministic System One){RESET}",
         f"{C_KEY}Environment{RESET}:  {C_VAL}{platform.system()} {platform.release()} ({platform.machine()}){RESET}",
         f"{C_KEY}Subprocess{RESET}:   {C_VAL}asyncio.subprocess (injection-safe){RESET}",
