@@ -1,0 +1,5 @@
+05/10/2026 02:34:57 PM | INFO     | scan.py:run_scan:23 - Initializing analysis for: /home/vivek/sample_apps/reversing_example/io.hextree.reversingexample.apk
+05/10/2026 02:34:57 PM | INFO     | tools.py:decompile_apk:27 - Decompiling /home/vivek/sample_apps/reversing_example/io.hextree.reversingexample.apk...
+05/10/2026 02:35:03 PM | INFO     | tools.py:decompile_apk:47 - Successfully decompiled io.hextree.reversingexample.apk to /home/vivek/sample_apps/reversing_example/io.hextree.reversingexample_decompiled.
+Manifest location: /home/vivek/sample_apps/reversing_example/io.hextree.reversingexample_decompiled/AndroidManifest.xml
+

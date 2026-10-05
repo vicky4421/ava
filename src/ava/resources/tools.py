@@ -38,7 +38,7 @@ def decompile_apk(apk_path: str, output_dir: str | None = None) -> str:
 
     cmd = ["apktool", "d", str(apk), "-o", str(target_dir), "-f"]
     try:
-        result = subprocess.run(
+        subprocess.run(
             args=cmd,
             capture_output=True,
             text=True,
@@ -51,7 +51,6 @@ def decompile_apk(apk_path: str, output_dir: str | None = None) -> str:
         return (
             f"Successfully decompiled {apk.name} to {target_dir}.\n"
             f"Manifest location: {target_dir / 'AndroidManifest.xml'}\n"
-            f"Output Summary:\n{result.stdout[-300:]}"
         )
     except subprocess.CalledProcessError as e:
         return f"Apktool failed with return code {e.returncode}.\nError details:\n{e.stderr}"
