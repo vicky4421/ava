@@ -1,18 +1,17 @@
 import logging
-from pathlib import Path
 
 from rich.console import Console
 from rich.logging import RichHandler
 
+from ava.config.paths import LOG_DIR
+
 console = Console()
 
-ROOT_DIR = Path(__file__).resolve().parent.parent
-LOG_DIR = ROOT_DIR / "logs"
 LOG_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def get_logger(
-    log_name: str = "app.log",
+    log_name: str = "ava.log",
     cli_level: int = logging.INFO,
     file_level: int = logging.DEBUG,
 ) -> logging.Logger:
