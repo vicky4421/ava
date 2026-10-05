@@ -21,7 +21,7 @@ def generate_color_palette_bar() -> str:
     return "".join(f"\033[48;5;{c}m    {RESET}" for c in colors)
 
 
-def print_ava_banner(target_apk: str = "demo.apk", target_pkg: str = "com.target.app"):
+def print_ava_banner(target_apk: str = "demo.apk"):
     username = os.getenv("USER", os.getenv("USERNAME", "operator"))
     hostname = platform.node() or "agent-node"
 
@@ -39,7 +39,6 @@ def print_ava_banner(target_apk: str = "demo.apk", target_pkg: str = "com.target
         f"{C_KEY}Environment{RESET}:  {C_VAL}{platform.system()} {platform.release()} ({platform.machine()}){RESET}",
         f"{C_KEY}Subprocess{RESET}:   {C_VAL}asyncio.subprocess (injection-safe){RESET}",
         f"{C_KEY}Target APK{RESET}:   {C_ACC}{target_apk}{RESET}",
-        f"{C_KEY}Package ID{RESET}:   {C_ACC}{target_pkg}{RESET}",
         f"{C_KEY}Audit State{RESET}:  {C_ACC}● Initializing Analysis Pipelines{RESET}",
         "",
         f"        {generate_color_palette_bar()}",
@@ -57,4 +56,4 @@ def print_ava_banner(target_apk: str = "demo.apk", target_pkg: str = "com.target
 
 
 if __name__ == "__main__":
-    print_ava_banner("insecure_bank_v2.apk", "com.payatu.bugbazaar")
+    print_ava_banner("insecure_bank_v2.apk")
