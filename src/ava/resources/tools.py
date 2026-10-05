@@ -47,7 +47,6 @@ def decompile_apk(apk_path: str, output_dir: str | None = None) -> str:
         logger.info(
             f"Successfully decompiled {apk.name} to {target_dir}.\n"
             f"Manifest location: {target_dir / 'AndroidManifest.xml'}\n"
-            f"Output Summary:\n{result.stdout[-300:]}"
         )
         return (
             f"Successfully decompiled {apk.name} to {target_dir}.\n"
