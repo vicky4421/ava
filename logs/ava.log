@@ -186,3 +186,24 @@ Manifest location: /home/vivek/sample_apps/reversing_example/io.hextree.reversin
 06/10/2026 04:18:15 PM | INFO     | scanner.py:scan_secrets_node:45 - Scanning for hardcoded secrets...
 06/10/2026 04:18:18 PM | INFO     | scanner.py:scan_secrets_node:138 - Scan complete. Found 0 unique candidate secret(s).
 06/10/2026 04:18:18 PM | INFO     | triage_secret.py:triage_secret_node:28 - No candidates to triage.
+06/10/2026 04:43:45 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+06/10/2026 04:43:48 PM | INFO     | scan.py:run_scan:82 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+06/10/2026 04:43:48 PM | INFO     | tools.py:decompile_apk:27 - Decompiling /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk...
+06/10/2026 04:44:00 PM | INFO     | tools.py:decompile_apk:48 - Successfully decompiled BugBazaar_v1.2.1.apk to /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1_decompiled.
+Manifest location: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1_decompiled/AndroidManifest.xml
+
+06/10/2026 04:44:00 PM | INFO     | scan_secrets.py:scan_secrets_node:45 - Scanning for hardcoded secrets...
+06/10/2026 04:44:06 PM | INFO     | scan_secrets.py:scan_secrets_node:138 - Scan complete. Found 2 unique candidate secret(s).
+06/10/2026 04:44:06 PM | INFO     | triage_secret.py:triage_secret_node:31 - Triaging 2 candidate secret(s) with LLM...
+06/10/2026 04:44:18 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+06/10/2026 04:45:10 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+06/10/2026 04:46:57 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+06/10/2026 04:47:36 PM | INFO     | scan.py:run_scan:82 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+06/10/2026 04:47:36 PM | INFO     | tools.py:decompile_apk:27 - Decompiling /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk...
+06/10/2026 04:47:48 PM | INFO     | tools.py:decompile_apk:48 - Successfully decompiled BugBazaar_v1.2.1.apk to /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1_decompiled.
+Manifest location: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1_decompiled/AndroidManifest.xml
+
+06/10/2026 04:47:48 PM | INFO     | scan_secrets.py:scan_secrets_node:45 - Scanning for hardcoded secrets...
+06/10/2026 04:47:55 PM | INFO     | scan_secrets.py:scan_secrets_node:138 - Scan complete. Found 2 unique candidate secret(s).
+06/10/2026 04:47:55 PM | INFO     | triage_secret.py:triage_secret_node:31 - Triaging 2 candidate secret(s) with LLM...
+06/10/2026 04:47:55 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite

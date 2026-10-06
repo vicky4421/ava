@@ -8,7 +8,7 @@ from ava.config.logger import get_logger
 from ava.resources.models import get_llm
 
 logger = get_logger()
-llm = get_llm()
+
 
 TRIAGE_SYSTEM_PROMPT = """
 You are an expert mobile application security engineer analyzing hardcoded candidate secrets from a decompiled Android APK.
@@ -29,6 +29,8 @@ async def triage_secret_node(state: AgentState) -> dict[str, Any]:
         return {"verified_secrets": []}
 
     logger.info(f"Triaging {len(candidates)} candidate secret(s) with LLM...")
+
+    llm = get_llm()
 
     # Format candidates and their 7-line context snippets
     formatted_payload = []
