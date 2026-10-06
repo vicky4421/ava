@@ -5,5 +5,5 @@ class Node(StrEnum):
     """LangGraph node identifiers."""
 
     DECOMPILE = "decompile"
-    SCAN_SECRET = "scan_secret"
-    TRIAGE_SECRET = "triage_secret"
+    SCAN_SECRETS = "scan_secrets"
+    TRIAGE_SECRETS = "triage_secrets"
