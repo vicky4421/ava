@@ -6,7 +6,7 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from ava.config.logger import get_logger
 from ava.config.settings import settings
 
-logger = get_logger(log_name="app.log")
+logger = get_logger()
 
 
 # initiate llm
@@ -15,7 +15,9 @@ def get_llm(model: str = "google_genai:gemini-3.1-flash-lite", temp: float = 0.0
     """Provides the shared Gemini LLM instance for synthesis and analysis nodes."""
 
     try:
-        llm = init_chat_model(model=model, temperature=temp)
+        llm = init_chat_model(
+            model=model, temperature=temp, api_key=settings.gemini_api_key
+        )
         logger.info(f"LLM initiated successfully: {model}")
         return llm
     except Exception as e:
