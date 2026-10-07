@@ -66,21 +66,25 @@ async def triage_secret_node(state: AgentState) -> dict[str, Any]:
         ),
     )
 
-    # Map candidates to their detected occurrences
+    # Map candidates to their detected occurrences and entropy
     candidate_locations = {
-        c["candidate"]: [
-            f"{loc['file']}:{loc['line']}" for loc in c.get("occurrences", [])
-        ]
+        c["candidate"]: {
+            "locations": [
+                f"{loc['file']}:{loc['line']}" for loc in c.get("occurrences", [])
+            ],
+            "entropy": c.get("entropy", 0.0),
+        }
         for c in candidates
     }
 
-    # Attach locations directly to the verified dicts
+    # Attach locations and entropy directly to the verified dicts
     verified_list = []
     for f in response.findings:
         finding_dict = f.model_dump()
         finding_dict["locations"] = candidate_locations.get(
             finding_dict["candidate"], []
         )
+        finding_dict["entropy"] = candidate_locations.get(finding_dict["entropy"], 0.0)
         verified_list.append(finding_dict)
 
     return {"verified_secrets": verified_list}
