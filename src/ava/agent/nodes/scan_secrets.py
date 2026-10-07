@@ -23,6 +23,25 @@ PATTERNS = {
         r"(?i)(?:api_key|apikey|secret|token)\s*[:=]\s*[\"']([A-Za-z0-9_-]{16,64})[\"']"
     ),
     "private_key_header": re.compile(r"-----BEGIN (?:RSA |EC )?PRIVATE KEY-----"),
+    "firebase_url": re.compile(r"https://[a-z0-9-]+\.firebaseio\.com"),
+    "github_personal_token": re.compile(r"gh[pous]_[A-Za-z0-9_]{36,255}"),
+    "slack_token": re.compile(r"xox[baprs]-[0-9A-Za-z-]{10,72}"),
+    "stripe_api_key": re.compile(r"(?:sk|pk)_(?:test|live)_[0-9a-zA-Z]{24,99}"),
+    "basic_auth_url": re.compile(
+        r"https?://[a-zA-Z0-9_\-\.]+:[a-zA-Z0-9_\-\.]+@[a-zA-Z0-9_\-\.]+"
+    ),
+    # 1. Standard bracketed CTF flags: flag{...}, FLAG{...}, ctf{...}, HTB{...}
+    "ctf_flag_bracketed": re.compile(
+        r"(?i)(?:flag|ctf|[a-z0-9_-]+ctf|htb|pico)\{([^\}\s]{4,100})\}"
+    ),
+    # 2. Key-value flag assignments: flag = "...", "secret_flag": "..."
+    "flag_assignment": re.compile(
+        r"(?i)(?:flag|hidden_flag|ctf_flag|secret_key)\s*[:=]\s*[\"']([A-Za-z0-9_\-!@#$%^&*()+=]{6,80})[\"']"
+    ),
+    # 3. Android XML string tags: <string name="flag">...</string>
+    "xml_flag_resource": re.compile(
+        r"(?i)<string[^>]*name=[\"'][^\"']*(?:flag|secret|token)[^\"']*[\"'][^>]*>([^<]+)</string>"
+    ),
 }
 
 

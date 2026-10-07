@@ -3,7 +3,7 @@ from langgraph.graph import END, START, StateGraph
 from ava.agent.nodes.constants import Node
 from ava.agent.nodes.decompile import decompile_node
 from ava.agent.nodes.scan_secrets import scan_secrets_node
-from ava.agent.nodes.triage_secret import triage_secret_node
+from ava.agent.nodes.triage_secrets import triage_secret_node
 from ava.agent.state import AgentState
 
 # ---------------------------------------------------------------------------------------------------
