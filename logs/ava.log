@@ -233,3 +233,116 @@ Manifest location: /home/vivek/sample_apps/reversing_example/io.hextree.reversin
 07/10/2026 10:35:35 AM | INFO     | scan_secrets.py:scan_secrets_node:157 - Scan complete. Found 2 unique candidate secret(s).
 07/10/2026 10:35:35 AM | INFO     | triage_secrets.py:triage_secret_node:31 - Triaging 2 candidate secret(s) with LLM...
 07/10/2026 10:35:35 AM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+07/10/2026 11:04:01 AM | ERROR    | scan.py:run_scan:86 - Target path does not exist: /home/vivek/sample_apps/reversing_example/io.hextree.reversingexample
+07/10/2026 11:04:09 AM | INFO     | scan.py:run_scan:93 - Initializing analysis for: /home/vivek/sample_apps/reversing_example/io.hextree.reversingexample.apk
+07/10/2026 11:04:09 AM | INFO     | tools.py:decompile_apk:27 - Decompiling /home/vivek/sample_apps/reversing_example/io.hextree.reversingexample.apk...
+07/10/2026 11:04:17 AM | INFO     | tools.py:decompile_apk:48 - Successfully decompiled io.hextree.reversingexample.apk to /home/vivek/sample_apps/reversing_example/io.hextree.reversingexample_decompiled.
+Manifest location: /home/vivek/sample_apps/reversing_example/io.hextree.reversingexample_decompiled/AndroidManifest.xml
+
+07/10/2026 11:04:17 AM | INFO     | scan_secrets.py:scan_secrets_node:64 - Scanning for hardcoded secrets...
+07/10/2026 11:04:24 AM | INFO     | scan.py:run_scan:93 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+07/10/2026 11:04:24 AM | INFO     | tools.py:decompile_apk:27 - Decompiling /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk...
+07/10/2026 11:04:40 AM | INFO     | scan_secrets.py:scan_secrets_node:157 - Scan complete. Found 1 unique candidate secret(s).
+07/10/2026 11:04:40 AM | INFO     | triage_secrets.py:triage_secret_node:31 - Triaging 1 candidate secret(s) with LLM...
+07/10/2026 11:04:41 AM | INFO     | tools.py:decompile_apk:48 - Successfully decompiled BugBazaar_v1.2.1.apk to /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1_decompiled.
+Manifest location: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1_decompiled/AndroidManifest.xml
+
+07/10/2026 11:04:41 AM | INFO     | scan_secrets.py:scan_secrets_node:64 - Scanning for hardcoded secrets...
+07/10/2026 11:04:41 AM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+07/10/2026 11:04:43 AM | ERROR    | scan.py:run_scan:106 - Error executing agent workflow
+Traceback (most recent call last):
+  File "/home/vivek/ava/src/ava/commands/scan.py", line 96, in run_scan
+    result = await app.ainvoke(
+             ^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/home/vivek/ava/.venv/lib/python3.13/site-packages/langgraph/pregel/main.py", line 4090, in ainvoke
+    async for chunk in self.astream(
+    ...<30 lines>...
+            chunks.append(chunk)
+  File "/home/vivek/ava/.venv/lib/python3.13/site-packages/langgraph/pregel/main.py", line 3440, in astream
+    async for _ in runner.atick(
+    ...<16 lines>...
+            yield o
+  File "/home/vivek/ava/.venv/lib/python3.13/site-packages/langgraph/pregel/_runner.py", line 396, in atick
+    await arun_with_retry(
+    ...<15 lines>...
+    )
+  File "/home/vivek/ava/.venv/lib/python3.13/site-packages/langgraph/pregel/_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vivek/ava/.venv/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 756, in ainvoke
+    input = await asyncio.create_task(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        step.ainvoke(input, config, **kwargs), context=context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/vivek/ava/.venv/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 522, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vivek/ava/src/ava/agent/nodes/triage_secrets.py", line 87, in triage_secret_node
+    finding_dict["entropy"] = candidate_locations.get(finding_dict["entropy"], 0.0)
+                                                      ~~~~~~~~~~~~^^^^^^^^^^^
+KeyError: 'entropy'
+During task with name 'triage_secrets' and id '52edd0d8-9327-9663-a12e-f6a8b30c3613'
+07/10/2026 11:05:14 AM | INFO     | scan_secrets.py:scan_secrets_node:157 - Scan complete. Found 2 unique candidate secret(s).
+07/10/2026 11:05:14 AM | INFO     | triage_secrets.py:triage_secret_node:31 - Triaging 2 candidate secret(s) with LLM...
+07/10/2026 11:05:15 AM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+07/10/2026 11:05:17 AM | ERROR    | scan.py:run_scan:106 - Error executing agent workflow
+Traceback (most recent call last):
+  File "/home/vivek/ava/src/ava/commands/scan.py", line 96, in run_scan
+    result = await app.ainvoke(
+             ^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/home/vivek/ava/.venv/lib/python3.13/site-packages/langgraph/pregel/main.py", line 4090, in ainvoke
+    async for chunk in self.astream(
+    ...<30 lines>...
+            chunks.append(chunk)
+  File "/home/vivek/ava/.venv/lib/python3.13/site-packages/langgraph/pregel/main.py", line 3440, in astream
+    async for _ in runner.atick(
+    ...<16 lines>...
+            yield o
+  File "/home/vivek/ava/.venv/lib/python3.13/site-packages/langgraph/pregel/_runner.py", line 396, in atick
+    await arun_with_retry(
+    ...<15 lines>...
+    )
+  File "/home/vivek/ava/.venv/lib/python3.13/site-packages/langgraph/pregel/_retry.py", line 744, in arun_with_retry
+    return await task.proc.ainvoke(task.input, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vivek/ava/.venv/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 756, in ainvoke
+    input = await asyncio.create_task(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        step.ainvoke(input, config, **kwargs), context=context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/vivek/ava/.venv/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 522, in ainvoke
+    ret = await self.afunc(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vivek/ava/src/ava/agent/nodes/triage_secrets.py", line 87, in triage_secret_node
+    finding_dict["entropy"] = candidate_locations.get(finding_dict["entropy"], 0.0)
+                                                      ~~~~~~~~~~~~^^^^^^^^^^^
+KeyError: 'entropy'
+During task with name 'triage_secrets' and id 'e3e3a9f5-10d0-a2f1-e2e3-b01b68734a26'
+07/10/2026 11:11:30 AM | INFO     | scan.py:run_scan:93 - Initializing analysis for: /home/vivek/sample_apps/reversing_example/io.hextree.reversingexample.apk
+07/10/2026 11:11:30 AM | INFO     | tools.py:decompile_apk:27 - Decompiling /home/vivek/sample_apps/reversing_example/io.hextree.reversingexample.apk...
+07/10/2026 11:11:39 AM | INFO     | tools.py:decompile_apk:48 - Successfully decompiled io.hextree.reversingexample.apk to /home/vivek/sample_apps/reversing_example/io.hextree.reversingexample_decompiled.
+Manifest location: /home/vivek/sample_apps/reversing_example/io.hextree.reversingexample_decompiled/AndroidManifest.xml
+
+07/10/2026 11:11:39 AM | INFO     | scan_secrets.py:scan_secrets_node:64 - Scanning for hardcoded secrets...
+07/10/2026 11:11:39 AM | INFO     | scan.py:run_scan:93 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+07/10/2026 11:11:39 AM | INFO     | tools.py:decompile_apk:27 - Decompiling /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk...
+07/10/2026 11:11:56 AM | INFO     | tools.py:decompile_apk:48 - Successfully decompiled BugBazaar_v1.2.1.apk to /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1_decompiled.
+Manifest location: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1_decompiled/AndroidManifest.xml
+
+07/10/2026 11:11:56 AM | INFO     | scan_secrets.py:scan_secrets_node:64 - Scanning for hardcoded secrets...
+07/10/2026 11:12:04 AM | INFO     | scan_secrets.py:scan_secrets_node:157 - Scan complete. Found 1 unique candidate secret(s).
+07/10/2026 11:12:04 AM | INFO     | triage_secrets.py:triage_secret_node:31 - Triaging 1 candidate secret(s) with LLM...
+07/10/2026 11:12:05 AM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+07/10/2026 11:12:29 AM | INFO     | scan_secrets.py:scan_secrets_node:157 - Scan complete. Found 2 unique candidate secret(s).
+07/10/2026 11:12:29 AM | INFO     | triage_secrets.py:triage_secret_node:31 - Triaging 2 candidate secret(s) with LLM...
+07/10/2026 11:12:30 AM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
