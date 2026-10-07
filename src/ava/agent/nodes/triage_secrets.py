@@ -17,6 +17,13 @@ Evaluate each candidate string within its surrounding context:
 1. Determine whether it is a legitimate high-risk secret, a public client-side identifier (e.g. non-restricted Google Maps key), or a dummy/test token.
 2. Assign appropriate severity (CRITICAL, HIGH, MEDIUM, LOW, INFO) and confidence.
 3. Provide a concise, professional risk summary.
+
+Apply the following deterministic severity classification criteria:
+- CRITICAL: Root/Admin credentials, unrestricted database passwords, private encryption master keys, service account private keys.
+- HIGH: High-privilege backend API tokens (AWS secret keys, Stripe live secret keys, GitHub personal access tokens, Slack bot tokens).
+- MEDIUM: Unrestricted cloud client tokens, storage bucket write tokens, or services with financial billing impact if abused.
+- LOW: Standard client-side public tokens (Google Maps API keys, Firebase project IDs/keys intended for client SDKs) where client exposure is expected architecture.
+- INFO: Static placeholders, mock values, format headers (e.g. PEM headers), dummy test strings, or false positives (Valid: No).
 """
 
 
