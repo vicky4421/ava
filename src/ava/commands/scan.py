@@ -2,6 +2,7 @@ import sys
 from pathlib import Path
 
 from rich.console import Console
+from rich.panel import Panel
 from rich.table import Table
 
 from ava.agent.graph import app
@@ -77,6 +78,94 @@ def render_secrets_table(verified_secrets: list[dict]):
     console.print(table)
 
 
+def render_manifest_tables(manifest_data: dict) -> None:
+    if not manifest_data:
+        console.print("[dim]No manifest data available.[/dim]")
+        return
+
+    # 1. Hygiene & Config Panel / Summary Table
+    pkg = manifest_data.get("package_name", "Unknown")
+    target_sdk = manifest_data.get("target_sdk", "N/A")
+
+    debuggable = manifest_data.get("debuggable", False)
+    debug_str = (
+        "[bold red]ENABLED (Vulnerable)[/]" if debuggable else "[green]Disabled[/]"
+    )
+
+    backup = manifest_data.get("allow_backup", True)
+    backup_str = "[yellow]True (Default)[/]" if backup else "[green]False[/]"
+
+    summary_text = (
+        f"[bold cyan]Package:[/] {pkg}  |  "
+        f"[bold cyan]Target SDK:[/] {target_sdk}\n"
+        f"[bold cyan]Debuggable:[/] {debug_str}  |  "
+        f"[bold cyan]Allow Backup:[/] {backup_str}"
+    )
+    console.print(Panel(summary_text, title="Manifest Hygiene", border_style="cyan"))
+
+    # 2. Component Attack Surface Table
+    entry_points = manifest_data.get("entry_points", [])
+    if not entry_points:
+        console.print("[green][✓][/green] No entry points found in manifest.")
+        return
+
+    table = Table(
+        title="Discovered Component Entry Points",
+        show_header=True,
+        header_style="bold blue",
+        expand=True,
+    )
+
+    table.add_column("Type", width=12)
+    table.add_column("Component Name", style="dim", ratio=3)
+    table.add_column("Exported", justify="center", width=10)
+    table.add_column("Permission", width=22)
+    table.add_column("Intent Filters", ratio=2)
+
+    type_colors = {
+        "activity": "magenta",
+        "service": "cyan",
+        "receiver": "yellow",
+        "provider": "blue",
+    }
+
+    for comp in entry_points:
+        ctype = comp.get("component_type", "unknown")
+        ctype_styled = f"[{type_colors.get(ctype, 'white')}]{ctype.capitalize()}[/]"
+
+        name = comp.get("name", "")
+        # Shorten full package prefix if it clutters the terminal
+        if name.startswith(pkg):
+            short_name = name[len(pkg) :]
+        else:
+            short_name = name
+
+        is_exported = comp.get("exported", False)
+        exported_styled = "[bold red]Yes[/]" if is_exported else "[dim]No[/]"
+
+        perm = comp.get("permission")
+        perm_styled = (
+            f"[green]{perm.split('.')[-1]}[/]" if perm else "[dim red]None[/dim red]"
+        )
+
+        filters = comp.get("intent_filters", [])
+        filters_styled = (
+            "\n".join([f.split(".")[-1] for f in filters])
+            if filters
+            else "[dim]None[/dim]"
+        )
+
+        table.add_row(
+            ctype_styled,
+            short_name,
+            exported_styled,
+            perm_styled,
+            filters_styled,
+        )
+
+    console.print(table)
+
+
 async def run_scan(target: Path):
     """Validates the input APK and streams the agent workflow."""
 
@@ -99,9 +188,19 @@ async def run_scan(target: Path):
                 "messages": [],
                 "secret_candidates": [],
                 "verified_secrets": [],
+                "decompiled_path": "",
+                "manifest_analysis": {},
             }
         )
-        render_secrets_table(verified_secrets=result["verified_secrets"])
+        # render_secrets_table(verified_secrets=result["verified_secrets"])
+        # 1. Print Secrets Table (if any)
+        if "verified_secrets" in result:
+            render_secrets_table(result["verified_secrets"])
+
+        # 2. Print Manifest Table
+        if "manifest_analysis" in result:
+            render_manifest_tables(result["manifest_analysis"])
+
     except Exception:
         logger.exception("Error executing agent workflow")
         sys.exit(1)

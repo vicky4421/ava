@@ -1,4 +1,4 @@
-from typing import Any, NotRequired, TypedDict
+from typing import Any, TypedDict
 
 from langgraph.graph import MessagesState
 
@@ -17,7 +17,12 @@ class SecretCandidate(TypedDict):
 
 
 class AgentState(MessagesState):
-    target_apk: NotRequired[str | None]
-    decompiled_path: NotRequired[str | None]
-    secret_candidates: NotRequired[list[SecretCandidate]]
+    target_apk: str | None
+    decompiled_path: str | None
+
+    # secret scanning
+    secret_candidates: list[SecretCandidate]
     verified_secrets: list[dict[str, Any]]
+
+    # manifest analysis
+    manifest_analysis: dict
