@@ -47,10 +47,41 @@ def analyze_manifest_node(state: AgentState) -> dict[str, Any]:
     # 1. Parse SDK versions
     uses_sdk = root.find("uses-sdk")
     target_sdk = None
+    min_sdk = None
+
     if uses_sdk is not None:
         target_sdk_str = uses_sdk.attrib.get(f"{ANDROID_NS}targetSdkVersion")
+        min_sdk_str = uses_sdk.attrib.get(f"{ANDROID_NS}minSdkVersion")
         if target_sdk_str and target_sdk_str.isdigit():
             target_sdk = int(target_sdk_str)
+        if min_sdk_str and min_sdk_str.isdigit():
+            min_sdk = int(min_sdk_str)
+
+    # 1b. Fallback to apktool.yml if missing from manifest
+    if target_sdk is None or min_sdk is None:
+        apktool_yml_path = decompiled_dir / "apktool.yml"
+        if apktool_yml_path.exists():
+            try:
+                for line in apktool_yml_path.read_text(encoding="utf-8").splitlines():
+                    line = line.strip()
+                    if line.startswith("targetSdkVersion:"):
+                        val = line.split(":", 1)[1].strip().strip("'").strip('"')
+                        if val.isdigit():
+                            target_sdk = int(val)
+                    elif line.startswith("minSdkVersion:"):
+                        val = line.split(":", 1)[1].strip().strip("'").strip('"')
+                        if val.isdigit():
+                            min_sdk = int(val)
+            except Exception as e:  # noqa: BLE001
+                logger.warning(f"Could not extract SDK versions from apktool.yml: {e}")
+
+    # check compileSdkVersion attribute on <manifest> root if still None
+    if target_sdk is None:
+        compile_sdk = root.attrib.get(
+            f"{ANDROID_NS}compileSdkVersion"
+        ) or root.attrib.get("compileSdkVersion")
+        if compile_sdk and compile_sdk.isdigit():
+            target_sdk = int(compile_sdk)
 
     # 2. Parse Application Level Flags
     app_elem = root.find("application")
