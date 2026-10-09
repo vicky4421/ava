@@ -2,7 +2,8 @@ import sys
 from pathlib import Path
 
 from ava.agent.graph import app
-from ava.commands.utils import render_manifest_tables, render_secrets_table
+from ava.commands.ui.manifest_view import render_manifest_tables
+from ava.commands.ui.secrets_view import render_secrets_table
 from ava.config.logger import get_logger
 
 logger = get_logger()
