@@ -589,3 +589,5 @@ Manifest location: /home/vivek/sample_apps/reversing_example/io.hextree.reversin
 09/10/2026 05:52:03 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
 09/10/2026 05:52:14 PM | INFO     | analyze_manifest.py:analyze_manifest_node:32 - Parsing AndroidManifest.xml for components and flags...
 09/10/2026 05:52:14 PM | INFO     | analyze_manifest.py:analyze_manifest_node:145 - Manifest parsed: 8 components found (3 exported).
+09/10/2026 05:53:32 PM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/reversing_example/io.hextree.reversingexample.apk
+09/10/2026 05:54:00 PM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
