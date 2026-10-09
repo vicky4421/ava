@@ -19,6 +19,12 @@ def build_parser() -> argparse.ArgumentParser:
         name="scan", help="Decompile and analyze a target APK"
     )
     scan_parser.add_argument("target", type=Path, help="Path to the target .apk file")
+    scan_parser.add_argument(
+        "--fresh",
+        action="store_true",
+        default=False,
+        help="Ignore cached PostgreSQL checkpoints and force a full re-scan",
+    )
 
     # --- Command: logs ---
     logs_parser = subparsers.add_parser(

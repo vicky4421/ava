@@ -28,7 +28,7 @@ async def async_main():
 
     if args.command == "scan":
         print_ava_banner(target_apk=str(args.target))
-        await run_scan(target=args.target)
+        await run_scan(target=args.target, fresh=args.fresh)
 
     elif args.command == "logs":
         handle_logs(lines=args.lines, clear=args.clear, show_path=args.path)
