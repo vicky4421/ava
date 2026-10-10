@@ -1,9 +1,10 @@
-from anyio import Path
+from pathlib import Path
+
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
 
-from config.logger import get_logger
-from resources.models import load_hf_embedding_model
+from ava.config.logger import get_logger
+from ava.resources.models import load_hf_embedding_model
 
 logger = get_logger()
 
