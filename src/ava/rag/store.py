@@ -10,6 +10,7 @@ from langchain_text_splitters import (
 from rich.console import Console
 
 from ava.config.logger import get_logger
+from ava.rag.bm25 import BM25Retriever
 from ava.rag.config import CHROMA_PERSIST_DIR, COLLECTION_NAME
 from ava.rag.parser import load_mastg_markdown_docs, load_mastg_rule_docs
 from ava.resources.models import load_hf_embedding_model
@@ -97,6 +98,7 @@ def get_chroma_vector_store(
 
 def ingest_mastg_to_chroma(repo_path: Path, force: bool = False) -> None:
     """Ingests and splits MASTG documents into the persistent Chroma DB."""
+
     vector_store = get_chroma_vector_store()
 
     existing_count = vector_store._collection.count()
@@ -114,6 +116,7 @@ def ingest_mastg_to_chroma(repo_path: Path, force: bool = False) -> None:
         vector_store = get_chroma_vector_store()
 
     console.print(f"[cyan]Parsing MASTG files from:[/cyan] {repo_path}")
+
     docs = load_mastg_markdown_docs(repo_path=repo_path)
     rules = load_mastg_rule_docs(repo_path=repo_path)
 
@@ -125,6 +128,11 @@ def ingest_mastg_to_chroma(repo_path: Path, force: bool = False) -> None:
 
     console.print(f"[cyan]Indexing {len(chunks)} chunks into Chroma...[/cyan]")
     vector_store.add_documents(documents=chunks)
+
+    # === BUILD AND SAVE BM25 INDEX ON THE SAME CHUNKS ===
+    console.print("[cyan]Building and persisting BM25 lexical index...[/cyan]")
+    bm25 = BM25Retriever.from_documents(documents=chunks)
+    bm25.save()
 
     final_count = vector_store._collection.count()
     console.print(
