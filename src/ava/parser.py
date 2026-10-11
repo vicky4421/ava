@@ -1,6 +1,8 @@
 import argparse
 from pathlib import Path
 
+from ava.rag.parser import DEFAULT_MASTG_PATH
+
 
 def build_parser() -> argparse.ArgumentParser:
     """Builds and returns the command line argument parser."""
@@ -47,6 +49,24 @@ def build_parser() -> argparse.ArgumentParser:
         "--path",
         action="store_true",
         help="Print the absolute path to the log file",
+    )
+
+    # --- Command: ingest_mastg ---
+    ingest_mastg_parser = subparsers.add_parser(
+        "ingest-mastg",
+        help="Ingest and index OWASP MASTG v2 documentation and rules into Chroma",
+    )
+    ingest_mastg_parser.add_argument(
+        "--path",
+        type=Path,
+        default=DEFAULT_MASTG_PATH,
+        help="Path to cloned mastg repository (default: MASTG_PATH or ~/mastg_docs/mastg)",
+    )
+    ingest_mastg_parser.add_argument(
+        "--force",
+        action="store_true",
+        default=False,
+        help="Overwrite existing Chroma collection if already populated",
     )
 
     return parser
