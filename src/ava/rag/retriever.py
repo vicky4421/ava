@@ -1,6 +1,7 @@
 # Author: Vivek Sawant
 # Date: 11-10-2026
 
+import hashlib
 from collections import defaultdict
 
 from langchain_core.documents import Document
@@ -25,7 +26,8 @@ def reciprocal_rank_fusion(
     for doc_list in ranked_lists:
         for rank, doc in enumerate(doc_list):
             # Unique identifier based on doc content and path to deduplicate
-            doc_key = f"{doc.metadata.get('source', '')}_{doc.page_content[:100]}"
+            doc_hash = hashlib.sha256(doc.page_content.encode("utf-8")).hexdigest()
+            doc_key = f"{doc.metadata.get('source', '')}_{doc_hash}"
             doc_lookup[doc_key] = doc
             rrf_scores[doc_key] += 1.0 / (k + (rank + 1))
 
@@ -56,12 +58,17 @@ class HybridMASTGRetriever:
         dense_docs = self.vector_store.similarity_search(query, k=dense_k)
 
         # 2. BM25 Lexical Retrieval
-        bm25_docs = self.bm25_retriever.search(query, top_k=bm25_k)
+        bm25_docs = self.bm25_retriever.search(query=query, top_k=bm25_k)
 
         # 3. Reciprocal Rank Fusion
         fused_candidates = reciprocal_rank_fusion([dense_docs, bm25_docs])
+        if not fused_candidates:
+            logger.warning(f"No matching candidates found for query: '{query}'")
+            return []
 
         # 4. Cross-Encoder Reranking
-        final_docs = rerank_documents(query, documents=fused_candidates, top_k=top_k)
+        final_docs = rerank_documents(
+            query=query, documents=fused_candidates, top_k=top_k
+        )
 
         return final_docs
