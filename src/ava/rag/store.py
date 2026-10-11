@@ -10,15 +10,12 @@ from langchain_text_splitters import (
 from rich.console import Console
 
 from ava.config.logger import get_logger
+from ava.rag.config import CHROMA_PERSIST_DIR, COLLECTION_NAME
 from ava.rag.parser import load_mastg_markdown_docs, load_mastg_rule_docs
 from ava.resources.models import load_hf_embedding_model
 
 logger = get_logger()
 console = Console()
-
-# Stored in user home
-PERSIST_DIRECTORY = Path.home() / ".ava" / "vector_store"
-COLLECTION_NAME = "mastg_knowledge"
 
 HEADERS_TO_SPLIT_ON = [
     ("#", "header_1"),
@@ -77,7 +74,7 @@ def get_chroma_vector_store(
     *,
     collection_name: str = COLLECTION_NAME,
     embedding_func: HuggingFaceEmbeddings | None = None,
-    persist_directory: Path | str = PERSIST_DIRECTORY,
+    persist_directory: Path | str = CHROMA_PERSIST_DIR,
 ) -> Chroma:
     """Retrieve or initialize persistent Chroma vector store."""
 
