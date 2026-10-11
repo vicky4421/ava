@@ -591,3 +591,9 @@ Manifest location: /home/vivek/sample_apps/reversing_example/io.hextree.reversin
 09/10/2026 05:52:14 PM | INFO     | analyze_manifest.py:analyze_manifest_node:145 - Manifest parsed: 8 components found (3 exported).
 09/10/2026 05:53:32 PM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/reversing_example/io.hextree.reversingexample.apk
 09/10/2026 05:54:00 PM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+11/10/2026 02:15:55 PM | INFO     | ingest_mastg.py:handle_ingest_mastg:28 - Starting MASTG ingestion from: /home/vivek/mastg_docs/mastg (force=False)
+11/10/2026 02:15:55 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+11/10/2026 02:16:27 PM | INFO     | store.py:get_chroma_vector_store:36 - Vector store 'chroma_db' initialized successfully.
+11/10/2026 03:08:15 PM | INFO     | ingest_mastg.py:handle_ingest_mastg:28 - Starting MASTG ingestion from: /home/vivek/mastg_docs/mastg (force=False)
+11/10/2026 03:08:15 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+11/10/2026 03:08:30 PM | INFO     | store.py:get_chroma_vector_store:94 - Vector store 'mastg_knowledge' initialized successfully.
