@@ -597,3 +597,6 @@ Manifest location: /home/vivek/sample_apps/reversing_example/io.hextree.reversin
 11/10/2026 03:08:15 PM | INFO     | ingest_mastg.py:handle_ingest_mastg:28 - Starting MASTG ingestion from: /home/vivek/mastg_docs/mastg (force=False)
 11/10/2026 03:08:15 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
 11/10/2026 03:08:30 PM | INFO     | store.py:get_chroma_vector_store:94 - Vector store 'mastg_knowledge' initialized successfully.
+11/10/2026 05:52:49 PM | INFO     | ingest_mastg.py:handle_ingest_mastg:28 - Starting MASTG ingestion from: /home/vivek/mastg_docs/mastg (force=True)
+11/10/2026 05:52:49 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+11/10/2026 05:53:19 PM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.

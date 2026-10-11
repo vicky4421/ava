@@ -33,7 +33,7 @@ def split_mastg_documents(raw_docs: list[Document]) -> list[Document]:
        chunks respect the embedding model's context window.
     """
 
-    markdownsplitter = MarkdownHeaderTextSplitter(
+    markdown_splitter = MarkdownHeaderTextSplitter(
         headers_to_split_on=HEADERS_TO_SPLIT_ON, strip_headers=False
     )
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=900, chunk_overlap=150)
@@ -42,7 +42,7 @@ def split_mastg_documents(raw_docs: list[Document]) -> list[Document]:
 
     for doc in raw_docs:
         # Semantic split along headings
-        header_splits = markdownsplitter.split_text(text=doc.page_content)
+        header_splits = markdown_splitter.split_text(text=doc.page_content)
 
         # Fallback if the document has no matching markdown headers e.g. rules
         if not header_splits:
@@ -125,6 +125,12 @@ def ingest_mastg_to_chroma(repo_path: Path, force: bool = False) -> None:
         f"[cyan]Loaded {len(all_raw_docs)} documents. Splitting into chunks...[/cyan]"
     )
     chunks = split_mastg_documents(raw_docs=all_raw_docs)
+
+    if not chunks:
+        console.print(
+            "[bold red]No chunks generated from documents. Aborting ingestion.[/bold red]"
+        )
+        return
 
     console.print(f"[cyan]Indexing {len(chunks)} chunks into Chroma...[/cyan]")
     vector_store.add_documents(documents=chunks)
