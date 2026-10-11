@@ -3,21 +3,24 @@
 
 from functools import lru_cache
 
+from anyio import Path
 from langchain_core.documents import Document
 from sentence_transformers import CrossEncoder
 
 from ava.config.logger import get_logger
-from ava.rag.config import DEFAULT_RERANKER_MODEL
+from ava.rag.config import DEFAULT_RERANKER_MODEL, LOCAL_RERANKER_PATH
 
 logger = get_logger()
 
 
 @lru_cache(maxsize=1)
-def get_reranker(model_name: str = DEFAULT_RERANKER_MODEL) -> CrossEncoder:
+def get_reranker(model_path: Path | str = str(LOCAL_RERANKER_PATH)) -> CrossEncoder:
     """Loads and caches the local CrossEncoder reranking model."""
 
-    logger.info(f"Loading CrossEncoder reranker: {model_name}")
-    return CrossEncoder(model_name, device="cpu", max_length=512)
+    model_str = str(model_path)
+
+    logger.info(f"Loading local CrossEncoder reranker from: {model_str}")
+    return CrossEncoder(model_str, device="cpu", max_length=512, local_files_only=True)
 
 
 def rerank_documents(

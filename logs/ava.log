@@ -607,3 +607,19 @@ Manifest location: /home/vivek/sample_apps/reversing_example/io.hextree.reversin
 11/10/2026 06:05:12 PM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
 11/10/2026 06:05:12 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'MODE_WORLD_READABLE SharedPreferences'
 11/10/2026 06:05:14 PM | INFO     | reranker.py:get_reranker:19 - Loading CrossEncoder reranker: BAAI/bge-reranker-base
+11/10/2026 06:17:27 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+11/10/2026 06:17:35 PM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+11/10/2026 06:17:35 PM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+11/10/2026 06:17:35 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'MODE_WORLD_READABLE SharedPreferences'
+11/10/2026 06:17:37 PM | INFO     | reranker.py:get_reranker:19 - Loading CrossEncoder reranker: BAAI/bge-reranker-base
+11/10/2026 06:39:29 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+11/10/2026 06:39:40 PM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+11/10/2026 06:39:40 PM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+11/10/2026 06:39:40 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'MODE_WORLD_READABLE SharedPreferences'
+11/10/2026 06:39:43 PM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: BAAI/bge-reranker-base
+11/10/2026 06:48:36 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+11/10/2026 06:48:43 PM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+11/10/2026 06:48:43 PM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+11/10/2026 06:48:43 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'MODE_WORLD_READABLE SharedPreferences'
+11/10/2026 06:48:45 PM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+11/10/2026 06:49:06 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure cryptographic key storage in keystore hardware'

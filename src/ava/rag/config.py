@@ -13,7 +13,8 @@ BM25_PERSIST_FILE = RAG_DATA_DIR / "bm25_index.pkl"
 COLLECTION_NAME = "mastg_knowledge"
 
 # Default models
-DEFAULT_RERANKER_MODEL = "BAAI/bge-reranker-base"
+LOCAL_RERANKER_PATH = Path("/mnt/hgfs/huggingface/bge-reranker-base")
+DEFAULT_RERANKER_MODEL = str(LOCAL_RERANKER_PATH)
 
 # Retrieval Hyperparameters
 DEFAULT_DENSE_K = 15
