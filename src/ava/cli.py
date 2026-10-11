@@ -4,6 +4,7 @@ import sys
 
 from ava.agent.graph import app
 from ava.banner import print_ava_banner
+from ava.commands.ingest_mastg import handle_ingest_mastg
 from ava.commands.logs import handle_logs
 from ava.commands.scan import run_scan
 from ava.config.logger import get_logger
@@ -32,6 +33,10 @@ async def async_main():
 
     elif args.command == "logs":
         handle_logs(lines=args.lines, clear=args.clear, show_path=args.path)
+
+    elif args.command == "ingest-mastg":
+        handle_ingest_mastg(path=args.path, force=args.force)
+
     else:
         parser.print_help()
         sys.exit(0)
