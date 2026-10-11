@@ -600,3 +600,10 @@ Manifest location: /home/vivek/sample_apps/reversing_example/io.hextree.reversin
 11/10/2026 05:52:49 PM | INFO     | ingest_mastg.py:handle_ingest_mastg:28 - Starting MASTG ingestion from: /home/vivek/mastg_docs/mastg (force=True)
 11/10/2026 05:52:49 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
 11/10/2026 05:53:19 PM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+11/10/2026 06:03:13 PM | INFO     | bm25.py:from_documents:39 - Building BM25 index from 883 document chunks...
+11/10/2026 06:03:13 PM | INFO     | bm25.py:save:51 - BM25 index successfully saved to: /home/vivek/.ava/rag/bm25_index.pkl
+11/10/2026 06:05:04 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+11/10/2026 06:05:12 PM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+11/10/2026 06:05:12 PM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+11/10/2026 06:05:12 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'MODE_WORLD_READABLE SharedPreferences'
+11/10/2026 06:05:14 PM | INFO     | reranker.py:get_reranker:19 - Loading CrossEncoder reranker: BAAI/bge-reranker-base
