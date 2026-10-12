@@ -83,7 +83,19 @@ def analyze_manifest_node(state: AgentState) -> dict[str, Any]:
         if compile_sdk and compile_sdk.isdigit():
             target_sdk = int(compile_sdk)
 
-    # 2. Parse Application Level Flags
+    # 2. Extract Requested Permissions (<uses-permission>)
+    requested_permissions: list[str] = []
+    for elem in root.iter():
+        tag_name = (
+            elem.tag.split("}")[-1].lower() if "}" in elem.tag else elem.tag.lower()
+        )
+        if tag_name == "uses-permission":
+            # Check both namespaced and plain attribute keys
+            perm_name = elem.attrib.get(f"{ANDROID_NS}name") or elem.attrib.get("name")
+            if perm_name and perm_name not in requested_permissions:
+                requested_permissions.append(perm_name)
+
+    # 3. Parse Application Level Flags
     app_elem = root.find("application")
     debuggable = False
     allow_backup = True  # Default is True in Android if omitted
@@ -96,7 +108,7 @@ def analyze_manifest_node(state: AgentState) -> dict[str, Any]:
             app_elem.attrib.get(f"{ANDROID_NS}allowBackup", "true").lower() == "true"
         )
 
-    # 3. Parse Component Entry Points
+    # 4. Parse Component Entry Points
     component_tags = {
         "activity": "activity",
         "receiver": "receiver",
@@ -110,7 +122,8 @@ def analyze_manifest_node(state: AgentState) -> dict[str, Any]:
         for tag, component_type in component_tags.items():
             for elem in app_elem.findall(tag):
                 name = elem.attrib.get(f"{ANDROID_NS}name", "unknown")
-                permission = elem.attrib.get(f"{ANDROID_NS}permission")
+                # Single permission string guarding this specific component
+                comp_perm = elem.attrib.get(f"{ANDROID_NS}permission")
 
                 # Extract intent filter action names
                 actions = []
@@ -135,7 +148,7 @@ def analyze_manifest_node(state: AgentState) -> dict[str, Any]:
                         name=name,
                         component_type=component_type,
                         exported=is_exported,
-                        permission=permission,
+                        permission=comp_perm,
                         intent_filters=actions,
                     )
                 )
@@ -143,7 +156,8 @@ def analyze_manifest_node(state: AgentState) -> dict[str, Any]:
     exported_count = sum(1 for c in discovered_entry_points if c.exported)
 
     logger.info(
-        f"Manifest parsed: {len(discovered_entry_points)} components found ({exported_count} exported)."
+        f"Manifest parsed: {len(discovered_entry_points)} components ({exported_count} exported), "
+        f"{len(requested_permissions)} permissions discovered."
     )
 
     manifest_result = ManifestAnalysisResult(
@@ -152,6 +166,7 @@ def analyze_manifest_node(state: AgentState) -> dict[str, Any]:
         debuggable=debuggable,
         allow_backup=allow_backup,
         entry_points=discovered_entry_points,
+        permissions=requested_permissions,
     )
 
     return {"manifest_analysis": manifest_result.model_dump()}
