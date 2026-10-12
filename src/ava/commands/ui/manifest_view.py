@@ -1,9 +1,9 @@
 # Author: Vivek Sawant
 # Date: 09-10-2026
 
+
 from rich.console import Console
 from rich.panel import Panel
-from rich.table import Table
 
 console = Console()
 
@@ -19,7 +19,9 @@ def render_manifest_tables(manifest_data: dict) -> None:
 
     debuggable = manifest_data.get("debuggable", False)
     debug_str = (
-        "[bold red]ENABLED (Vulnerable)[/]" if debuggable else "[green]Disabled[/]"
+        "[bold bright_red]ENABLED (Vulnerable)[/]"
+        if debuggable
+        else "[green]Disabled[/]"
     )
 
     backup = manifest_data.get("allow_backup", True)
@@ -33,77 +35,87 @@ def render_manifest_tables(manifest_data: dict) -> None:
     )
     console.print(Panel(summary_text, title="Manifest Hygiene", border_style="cyan"))
 
-    # 2. All Discovered Components (Sources + Internal Sinks)
+    # 2. Attack Surface & Component Metrics Aggregation
     entry_points = manifest_data.get("entry_points", [])
-    if not entry_points:
-        console.print("[green][✓][/green] No entry points found in manifest.")
-        return
-
-    table = Table(
-        title="Discovered Components & Attack Surface",
-        show_header=True,
-        header_style="bold blue",
-        expand=True,
+    permissions = (
+        manifest_data.get("permissions") or manifest_data.get("uses_permissions") or []
     )
 
-    table.add_column("Type", width=12)
-    table.add_column("Component Name", ratio=3)
-    table.add_column("Exported", justify="center", width=10)
-    table.add_column("Permission", width=22)
-    table.add_column("Intent Filters", ratio=2)
+    total_components = len(entry_points)
+    exported_components = [c for c in entry_points if c.get("exported", False)]
+    total_exported = len(exported_components)
 
-    type_colors = {
-        "activity": "magenta",
-        "service": "cyan",
-        "receiver": "yellow",
-        "provider": "blue",
+    # Breakdown by component category : component_type: [no. of total_components, no. of exported_components]
+    breakdown = {
+        "activity": [0, 0],
+        "service": [0, 0],
+        "receiver": [0, 0],
+        "provider": [0, 0],
+    }
+    filter_count = 0
+
+    for comp in entry_points:
+        c_type = comp.get("component_type", "").lower()
+        is_exported = comp.get("exported", False)
+        filters = comp.get("intent_filters", [])
+
+        if filters:
+            filter_count += len(filters)
+
+        if c_type in breakdown:
+            breakdown[c_type][0] += 1  # Total count
+            if is_exported:
+                breakdown[c_type][1] += 1  # Exported count
+
+    # Formatted component string
+    comp_parts = []
+    type_meta = {
+        "activity": ("magenta", "Activities"),
+        "service": ("cyan", "Services"),
+        "receiver": ("yellow", "Receivers"),
+        "provider": ("bright_blue", "Providers"),  # Changed from standard 'blue'
     }
 
-    # Sort: Exported components first (sources), then unexported (internal sinks)
-    sorted_components = sorted(
-        entry_points,
-        key=lambda x: (not x.get("exported", False), x.get("name", "")),
+    comp_parts = []
+    for ctype, (tot, exp) in breakdown.items():
+        if tot > 0:
+            color, label = type_meta.get(ctype, ("white", f"{ctype.capitalize()}s"))
+            exp_str = f"[bold bright_red]{exp}[/]" if exp > 0 else "[bold green]0[/]"
+            comp_parts.append(f"[{color}]{label}:[/] {tot} ({exp_str} exported)")
+
+    comp_summary_line = (
+        "  |  ".join(comp_parts) if comp_parts else "[dim]None discovered[/dim]"
     )
 
-    for comp in sorted_components:
-        ctype = comp.get("component_type", "unknown")
-        ctype_styled = f"[{type_colors.get(ctype, 'white')}]{ctype.capitalize()}[/]"
+    exported_highlight = (
+        f"[bold bright_red]{total_exported} Exported[/]"
+        if total_exported > 0
+        else "[green]0 Exported[/]"
+    )
 
-        name = comp.get("name", "")
-        # Shorten package namespace for cleaner layout
-        if name.startswith(pkg):
-            short_name = name[len(pkg) :]
-        else:
-            short_name = name
+    # Permission summary formatting
+    perm_count = len(permissions)
+    if perm_count > 0:
+        # Show shortened permission names (last token), top 5 preview
+        short_perms = [p.split(".")[-1] for p in permissions[:5]]
+        perm_preview = ", ".join(short_perms)
+        if perm_count > 5:
+            perm_preview += f" [dim](+{perm_count - 5} more)[/dim]"
+        perm_line = f"[bold white]{perm_count}[/] total → [dim]{perm_preview}[/dim]"
+    else:
+        perm_line = "[green]None declared[/green]"
 
-        is_exported = comp.get("exported", False)
-        if is_exported:
-            # High-visibility row for entry points
-            comp_name_styled = f"[bold white]{short_name}[/]"
-            exported_styled = "[bold red]Yes[/]"
-        else:
-            # Dimmed row for internal sinks
-            comp_name_styled = f"[dim]{short_name}[/]"
-            exported_styled = "[dim]No[/]"
+    surface_summary_text = (
+        f"[bold cyan]Total Attack Surface:[/] {total_components} Components ({exported_highlight})  |  "
+        f"[bold cyan]Intent Filters:[/] {filter_count}\n"
+        f"[bold cyan]Components Breakdown:[/] {comp_summary_line}\n"
+        f"[bold cyan]Permissions:[/] {perm_line}"
+    )
 
-        perm = comp.get("permission")
-        perm_styled = (
-            f"[green]{perm.split('.')[-1]}[/]" if perm else "[dim red]None[/dim red]"
+    console.print(
+        Panel(
+            surface_summary_text,
+            title="Attack Surface Summary",
+            border_style="yellow" if total_exported > 0 else "green",
         )
-
-        filters = comp.get("intent_filters", [])
-        filters_styled = (
-            "\n".join([f.split(".")[-1] for f in filters])
-            if filters
-            else "[dim]None[/dim]"
-        )
-
-        table.add_row(
-            ctype_styled,
-            comp_name_styled,
-            exported_styled,
-            perm_styled,
-            filters_styled,
-        )
-
-    console.print(table)
+    )

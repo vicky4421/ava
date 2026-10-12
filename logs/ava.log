@@ -623,3 +623,61 @@ Manifest location: /home/vivek/sample_apps/reversing_example/io.hextree.reversin
 11/10/2026 06:48:43 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'MODE_WORLD_READABLE SharedPreferences'
 11/10/2026 06:48:45 PM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
 11/10/2026 06:49:06 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure cryptographic key storage in keystore hardware'
+12/10/2026 10:32:07 AM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+12/10/2026 10:33:48 AM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+12/10/2026 10:35:07 AM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+12/10/2026 10:36:27 AM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+12/10/2026 10:37:09 AM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/reversing_example/io.hextree.reversingexample.apk
+12/10/2026 10:38:16 AM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/reversing_example/io.hextree.reversingexample.apk
+12/10/2026 10:38:22 AM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/reversing_example/io.hextree.reversingexample.apk
+12/10/2026 11:09:11 AM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+12/10/2026 11:14:25 AM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/reversing_example/io.hextree.reversingexample.apk
+12/10/2026 11:18:19 AM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+12/10/2026 12:29:30 PM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+12/10/2026 12:34:19 PM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+12/10/2026 12:37:07 PM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+12/10/2026 12:37:34 PM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+12/10/2026 12:38:21 PM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+12/10/2026 12:38:21 PM | INFO     | tools.py:decompile_apk:27 - Decompiling /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk...
+12/10/2026 12:38:33 PM | INFO     | tools.py:decompile_apk:48 - Successfully decompiled BugBazaar_v1.2.1.apk to /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1_decompiled.
+Manifest location: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1_decompiled/AndroidManifest.xml
+
+12/10/2026 12:38:33 PM | INFO     | scan_secrets.py:scan_secrets_node:64 - Scanning for hardcoded secrets...
+12/10/2026 12:39:01 PM | INFO     | scan_secrets.py:scan_secrets_node:157 - Scan complete. Found 2 unique candidate secret(s).
+12/10/2026 12:39:01 PM | INFO     | triage_secrets.py:triage_secret_node:38 - Triaging 2 candidate secret(s) with LLM...
+12/10/2026 12:39:01 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+12/10/2026 12:39:10 PM | INFO     | analyze_manifest.py:analyze_manifest_node:32 - Parsing AndroidManifest.xml for components and flags...
+12/10/2026 12:39:10 PM | INFO     | analyze_manifest.py:analyze_manifest_node:158 - Manifest parsed: 64 components (21 exported), 15 permissions discovered.
+12/10/2026 12:39:10 PM | INFO     | analyze_manifest.py:analyze_manifest_node:163 - Manifest parsed: 64 components found (21 exported).
+12/10/2026 12:40:00 PM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/reversing_example/io.hextree.reversingexample.apk
+12/10/2026 12:40:11 PM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/reversing_example/io.hextree.reversingexample.apk
+12/10/2026 12:40:11 PM | INFO     | tools.py:decompile_apk:27 - Decompiling /home/vivek/sample_apps/reversing_example/io.hextree.reversingexample.apk...
+12/10/2026 12:40:18 PM | INFO     | tools.py:decompile_apk:48 - Successfully decompiled io.hextree.reversingexample.apk to /home/vivek/sample_apps/reversing_example/io.hextree.reversingexample_decompiled.
+Manifest location: /home/vivek/sample_apps/reversing_example/io.hextree.reversingexample_decompiled/AndroidManifest.xml
+
+12/10/2026 12:40:18 PM | INFO     | scan_secrets.py:scan_secrets_node:64 - Scanning for hardcoded secrets...
+12/10/2026 12:40:33 PM | INFO     | scan_secrets.py:scan_secrets_node:157 - Scan complete. Found 1 unique candidate secret(s).
+12/10/2026 12:40:33 PM | INFO     | triage_secrets.py:triage_secret_node:38 - Triaging 1 candidate secret(s) with LLM...
+12/10/2026 12:40:33 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+12/10/2026 12:40:46 PM | INFO     | analyze_manifest.py:analyze_manifest_node:32 - Parsing AndroidManifest.xml for components and flags...
+12/10/2026 12:40:46 PM | INFO     | analyze_manifest.py:analyze_manifest_node:158 - Manifest parsed: 8 components (3 exported), 1 permissions discovered.
+12/10/2026 12:40:46 PM | INFO     | analyze_manifest.py:analyze_manifest_node:163 - Manifest parsed: 8 components found (3 exported).
+12/10/2026 12:42:28 PM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/reversing_example/io.hextree.reversingexample.apk
+12/10/2026 12:42:51 PM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+12/10/2026 12:42:51 PM | INFO     | tools.py:decompile_apk:27 - Decompiling /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk...
+12/10/2026 12:42:53 PM | ERROR    | cli.py:main:51 - Analysis aborted by user.
+12/10/2026 12:42:59 PM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+12/10/2026 12:42:59 PM | INFO     | tools.py:decompile_apk:27 - Decompiling /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk...
+12/10/2026 12:43:10 PM | INFO     | tools.py:decompile_apk:48 - Successfully decompiled BugBazaar_v1.2.1.apk to /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1_decompiled.
+Manifest location: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1_decompiled/AndroidManifest.xml
+
+12/10/2026 12:43:10 PM | INFO     | scan_secrets.py:scan_secrets_node:64 - Scanning for hardcoded secrets...
+12/10/2026 12:43:39 PM | INFO     | scan_secrets.py:scan_secrets_node:157 - Scan complete. Found 2 unique candidate secret(s).
+12/10/2026 12:43:39 PM | INFO     | triage_secrets.py:triage_secret_node:38 - Triaging 2 candidate secret(s) with LLM...
+12/10/2026 12:43:40 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+12/10/2026 12:43:58 PM | INFO     | analyze_manifest.py:analyze_manifest_node:32 - Parsing AndroidManifest.xml for components and flags...
+12/10/2026 12:43:58 PM | INFO     | analyze_manifest.py:analyze_manifest_node:158 - Manifest parsed: 64 components (21 exported), 15 permissions discovered.
+12/10/2026 12:43:58 PM | INFO     | analyze_manifest.py:analyze_manifest_node:163 - Manifest parsed: 64 components found (21 exported).
+12/10/2026 12:48:53 PM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+12/10/2026 12:50:38 PM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+12/10/2026 12:51:45 PM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
