@@ -17,4 +17,5 @@ class ManifestAnalysisResult(BaseModel):
     target_sdk: int | None = None
     debuggable: bool = False
     allow_backup: bool = True
+    permissions: list[str] = []
     entry_points: list[ComponentEntryPoint] = Field(default_factory=list)
