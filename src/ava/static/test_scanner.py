@@ -3,27 +3,28 @@
 
 from pathlib import Path
 
+from ava.static.code_extractor import extract_method_context
 from ava.static.sink_rules import SMALI_RULES
 from ava.static.sink_scanner import scan_smali_file
 
 # Resolve to the actual decompiled root
-decompiled_root = (
-    Path.home()
-    / "sample_apps"
-    / "reversing_example"
-    / "io.hextree.reversingexample_decompiled"
-)
-
 # decompiled_root = (
-#     Path.home() / "sample_apps" / "bugbazaar" / "BugBazaar_v1.2.1_decompiled"
+#     Path.home()
+#     / "sample_apps"
+#     / "reversing_example"
+#     / "io.hextree.reversingexample_decompiled"
 # )
+
+decompiled_root = (
+    Path.home() / "sample_apps" / "bugbazaar" / "BugBazaar_v1.2.1_decompiled"
+)
 
 smali_roots = sorted(decompiled_root.glob("smali*"))
 print(f"Found {len(smali_roots)} Smali root directories.")
 
 # Specify the target package scope explicitly
 # target_package = "com.BugBazaar"
-target_package = "io.hextree.reversingexample"
+target_package = "com.BugBazaar"
 dummy_exported = {}
 total_found = 0
 
@@ -43,3 +44,25 @@ for s_dir in smali_roots:
             total_found += 1
 
 print(f"\nTotal Leads Found (In-Scope): {total_found}")
+
+# Test Target 1: Deeplink WebView setup (L48)
+deeplink_smali = (
+    decompiled_root / "smali" / "com" / "BugBazaar" / "ui" / "Deeplink.smali"
+)
+target_line = 48
+
+print(f"--- Extracting context for {deeplink_smali.name} around line {target_line} ---")
+
+if deeplink_smali.exists():
+    snippet = extract_method_context(
+        file_path=deeplink_smali,
+        target_line=target_line,
+        window_padding=30,
+        max_total_lines=200,
+    )
+    if snippet:
+        print(snippet)
+    else:
+        print("Failed to extract method context.")
+else:
+    print(f"File not found: {deeplink_smali}")
