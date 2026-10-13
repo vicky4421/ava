@@ -8,6 +8,8 @@ class Node(StrEnum):
     SCAN_SECRETS = "scan_secrets"
     TRIAGE_SECRETS = "triage_secrets"
     ANALYZE_MANIFEST = "analyze_manifest"
+    SCAN_SINK = "scan_sink"
+    INVESTIGATOR = "investigator"
 
 
 class RouteVerdicts(StrEnum):
