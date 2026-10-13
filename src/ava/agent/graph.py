@@ -4,7 +4,9 @@ from langgraph.graph import END, START, StateGraph
 from ava.agent.nodes.analyze_manifest import analyze_manifest_node
 from ava.agent.nodes.constants import Node, RouteVerdicts
 from ava.agent.nodes.decompile import decompile_node
+from ava.agent.nodes.investigator import investigate_leads_node
 from ava.agent.nodes.scan_secrets import scan_secrets_node
+from ava.agent.nodes.sink_scanner import scan_sink_node
 from ava.agent.nodes.triage_secrets import triage_secret_node
 from ava.agent.routers import should_triage_secrets
 from ava.agent.state import AgentState
@@ -23,6 +25,8 @@ def build_app(checkpointer: BaseCheckpointSaver | None = None):
     graph.add_node(Node.SCAN_SECRETS, scan_secrets_node)
     graph.add_node(Node.TRIAGE_SECRETS, triage_secret_node)
     graph.add_node(Node.ANALYZE_MANIFEST, analyze_manifest_node)
+    graph.add_node(Node.SCAN_SINK, scan_sink_node)
+    graph.add_node(Node.INVESTIGATOR, investigate_leads_node)
 
     # ---------------------------------------------------------------------------------------------------
     # add edges to graph
@@ -38,7 +42,9 @@ def build_app(checkpointer: BaseCheckpointSaver | None = None):
         },
     )
     graph.add_edge(Node.TRIAGE_SECRETS, Node.ANALYZE_MANIFEST)
-    graph.add_edge(Node.ANALYZE_MANIFEST, END)
+    graph.add_edge(Node.ANALYZE_MANIFEST, Node.SCAN_SINK)
+    graph.add_edge(Node.SCAN_SINK, Node.INVESTIGATOR)
+    graph.add_edge(Node.INVESTIGATOR, END)
 
     return graph.compile(checkpointer=checkpointer)
 
