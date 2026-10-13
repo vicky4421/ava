@@ -681,3 +681,310 @@ Manifest location: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1_decompiled
 12/10/2026 12:48:53 PM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
 12/10/2026 12:50:38 PM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
 12/10/2026 12:51:45 PM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+12/10/2026 06:33:11 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+12/10/2026 06:33:23 PM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+12/10/2026 06:33:23 PM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+12/10/2026 06:33:23 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+12/10/2026 06:33:23 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+12/10/2026 06:33:25 PM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+12/10/2026 08:37:02 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+12/10/2026 08:37:10 PM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+12/10/2026 08:37:10 PM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+12/10/2026 08:37:10 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+12/10/2026 08:37:10 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+12/10/2026 08:37:12 PM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+12/10/2026 08:40:15 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+12/10/2026 08:40:23 PM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+12/10/2026 08:40:23 PM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+12/10/2026 08:40:23 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+12/10/2026 08:40:23 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+12/10/2026 08:40:25 PM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+12/10/2026 08:43:44 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+12/10/2026 08:43:52 PM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+12/10/2026 08:43:52 PM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+12/10/2026 08:43:52 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+12/10/2026 08:43:52 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+12/10/2026 08:43:53 PM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+12/10/2026 09:13:40 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+12/10/2026 09:13:54 PM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+12/10/2026 09:13:54 PM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+12/10/2026 09:13:54 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+12/10/2026 09:13:54 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+12/10/2026 09:13:57 PM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+12/10/2026 09:20:03 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+12/10/2026 09:20:11 PM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+12/10/2026 09:20:11 PM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+12/10/2026 09:20:11 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+12/10/2026 09:20:11 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+12/10/2026 09:20:13 PM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+12/10/2026 09:24:57 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+12/10/2026 09:25:06 PM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+12/10/2026 09:25:06 PM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+12/10/2026 09:25:06 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+12/10/2026 09:25:06 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+12/10/2026 09:25:07 PM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+12/10/2026 09:27:31 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+12/10/2026 09:27:39 PM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+12/10/2026 09:27:39 PM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+12/10/2026 09:27:39 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+12/10/2026 09:27:39 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+12/10/2026 09:27:40 PM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+12/10/2026 09:30:24 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+12/10/2026 09:30:34 PM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+12/10/2026 09:30:34 PM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+12/10/2026 09:30:34 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+12/10/2026 09:30:34 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+12/10/2026 09:30:35 PM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+13/10/2026 10:16:04 AM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+13/10/2026 10:16:15 AM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+13/10/2026 10:16:15 AM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+13/10/2026 10:16:15 AM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+13/10/2026 10:16:15 AM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+13/10/2026 10:16:20 AM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+13/10/2026 10:28:30 AM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+13/10/2026 10:28:42 AM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+13/10/2026 10:28:42 AM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+13/10/2026 10:28:42 AM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+13/10/2026 10:28:42 AM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+13/10/2026 10:28:44 AM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+13/10/2026 10:44:39 AM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+13/10/2026 10:44:48 AM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+13/10/2026 10:44:48 AM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+13/10/2026 10:44:49 AM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+13/10/2026 10:44:49 AM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+13/10/2026 10:44:51 AM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+13/10/2026 10:46:28 AM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+13/10/2026 10:46:37 AM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+13/10/2026 10:46:37 AM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+13/10/2026 10:46:37 AM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+13/10/2026 10:46:37 AM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+13/10/2026 10:46:39 AM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+13/10/2026 10:54:46 AM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+13/10/2026 10:54:57 AM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+13/10/2026 10:54:57 AM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+13/10/2026 10:54:57 AM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+13/10/2026 10:54:57 AM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+13/10/2026 10:54:59 AM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+13/10/2026 10:57:25 AM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+13/10/2026 10:57:35 AM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+13/10/2026 10:57:35 AM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+13/10/2026 10:57:36 AM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+13/10/2026 10:57:36 AM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+13/10/2026 10:57:37 AM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+13/10/2026 10:59:23 AM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+13/10/2026 10:59:33 AM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+13/10/2026 10:59:33 AM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+13/10/2026 10:59:33 AM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+13/10/2026 10:59:33 AM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+13/10/2026 10:59:34 AM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+13/10/2026 11:41:02 AM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+13/10/2026 11:41:15 AM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+13/10/2026 11:41:15 AM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+13/10/2026 11:41:15 AM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+13/10/2026 11:41:15 AM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+13/10/2026 11:41:18 AM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+13/10/2026 01:34:24 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+13/10/2026 01:34:31 PM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+13/10/2026 01:34:31 PM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+13/10/2026 01:34:31 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+13/10/2026 01:34:31 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+13/10/2026 01:34:33 PM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+13/10/2026 02:08:54 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+13/10/2026 02:09:01 PM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+13/10/2026 02:09:01 PM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+13/10/2026 02:09:01 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+13/10/2026 02:09:01 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+13/10/2026 02:09:03 PM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+13/10/2026 02:20:28 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+13/10/2026 02:20:36 PM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+13/10/2026 02:20:36 PM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+13/10/2026 02:20:36 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+13/10/2026 02:20:36 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+13/10/2026 02:20:37 PM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+13/10/2026 02:23:45 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+13/10/2026 02:23:52 PM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+13/10/2026 02:23:52 PM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+13/10/2026 02:23:52 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+13/10/2026 02:23:52 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+13/10/2026 02:23:54 PM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+13/10/2026 02:32:08 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+13/10/2026 02:32:15 PM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+13/10/2026 02:32:15 PM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+13/10/2026 02:32:16 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+13/10/2026 02:32:16 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+13/10/2026 02:32:17 PM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+13/10/2026 02:51:43 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+13/10/2026 02:51:50 PM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+13/10/2026 02:51:50 PM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+13/10/2026 02:51:50 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.6-flash
+13/10/2026 02:51:50 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+13/10/2026 02:51:52 PM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+13/10/2026 02:53:17 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+13/10/2026 02:53:25 PM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+13/10/2026 02:53:25 PM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+13/10/2026 02:53:26 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.6-flash
+13/10/2026 02:53:26 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+13/10/2026 02:53:27 PM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+13/10/2026 02:56:32 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+13/10/2026 02:56:39 PM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+13/10/2026 02:56:39 PM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+13/10/2026 02:56:39 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+13/10/2026 02:56:39 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+13/10/2026 02:56:41 PM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+13/10/2026 03:01:29 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+13/10/2026 03:01:36 PM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+13/10/2026 03:01:36 PM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+13/10/2026 03:01:37 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+13/10/2026 03:01:37 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+13/10/2026 03:01:38 PM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+13/10/2026 04:50:36 PM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+13/10/2026 04:51:11 PM | INFO     | scan.py:run_scan:33 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+13/10/2026 04:51:11 PM | INFO     | tools.py:decompile_apk:27 - Decompiling /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk...
+13/10/2026 04:51:34 PM | INFO     | tools.py:decompile_apk:48 - Successfully decompiled BugBazaar_v1.2.1.apk to /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1_decompiled.
+Manifest location: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1_decompiled/AndroidManifest.xml
+
+13/10/2026 04:51:34 PM | INFO     | scan_secrets.py:scan_secrets_node:64 - Scanning for hardcoded secrets...
+13/10/2026 04:52:07 PM | INFO     | scan_secrets.py:scan_secrets_node:157 - Scan complete. Found 2 unique candidate secret(s).
+13/10/2026 04:52:07 PM | INFO     | triage_secrets.py:triage_secret_node:38 - Triaging 2 candidate secret(s) with LLM...
+13/10/2026 04:52:08 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+13/10/2026 04:52:11 PM | INFO     | analyze_manifest.py:analyze_manifest_node:32 - Parsing AndroidManifest.xml for components and flags...
+13/10/2026 04:52:11 PM | INFO     | analyze_manifest.py:analyze_manifest_node:158 - Manifest parsed: 64 components (21 exported), 15 permissions discovered.
+13/10/2026 04:52:11 PM | INFO     | sink_scanner.py:scan_sink_node:141 - Initiating sink scan across 3 smali roots...
+13/10/2026 04:52:11 PM | INFO     | sink_scanner.py:scan_sink_node:160 - Sink scan completed: 16 leads identified (5 in exported components).
+13/10/2026 04:52:11 PM | INFO     | investigator.py:investigate_leads_node:133 - Starting audit loop across 16 candidate leads...
+13/10/2026 04:52:11 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+13/10/2026 04:52:22 PM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+13/10/2026 04:52:22 PM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+13/10/2026 04:52:22 PM | INFO     | investigator.py:investigate_leads_node:142 - [1/16] Investigating com.BugBazaar.ui.TermsAndConditionsActivity::setupwebview (SEC-WEB-001)...
+13/10/2026 04:52:22 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+13/10/2026 04:52:25 PM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+13/10/2026 04:52:56 PM | INFO     | investigator.py:investigate_leads_node:153 - Result: [VULNERABLE] SEC-WEB-001 (Severity: CRITICAL, Conf: 100%)
+13/10/2026 04:52:56 PM | INFO     | investigator.py:investigate_leads_node:142 - [2/16] Investigating com.BugBazaar.ui.Contact_us::onCreate (SEC-WEB-001)...
+13/10/2026 04:52:56 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+13/10/2026 04:53:11 PM | INFO     | investigator.py:investigate_leads_node:153 - Result: [VULNERABLE] SEC-WEB-001 (Severity: CRITICAL, Conf: 100%)
+13/10/2026 04:53:11 PM | INFO     | investigator.py:investigate_leads_node:142 - [3/16] Investigating com.BugBazaar.ui.Deeplink::setupwebview (SEC-WEB-001)...
+13/10/2026 04:53:11 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+13/10/2026 04:53:26 PM | INFO     | investigator.py:investigate_leads_node:153 - Result: [VULNERABLE] SEC-WEB-001 (Severity: CRITICAL, Conf: 100%)
+13/10/2026 04:53:26 PM | INFO     | investigator.py:investigate_leads_node:142 - [4/16] Investigating com.BugBazaar.ui.components.CustomBR::onReceive (SEC-COMP-001)...
+13/10/2026 04:53:26 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+13/10/2026 04:53:48 PM | INFO     | investigator.py:investigate_leads_node:153 - Result: [VULNERABLE] SEC-COMP-001 (Severity: HIGH, Conf: 95%)
+13/10/2026 04:53:48 PM | INFO     | investigator.py:investigate_leads_node:142 - [5/16] Investigating com.BugBazaar.ui.TermsAndConditionsActivity::startWebView (SEC-WEB-002)...
+13/10/2026 04:53:48 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security Add JavascriptInterface exposed on WebView.'
+13/10/2026 04:54:02 PM | INFO     | investigator.py:investigate_leads_node:153 - Result: [VULNERABLE] SEC-WEB-002 (Severity: HIGH, Conf: 95%)
+13/10/2026 04:54:02 PM | INFO     | investigator.py:investigate_leads_node:142 - [6/16] Investigating com.BugBazaar.utils.checkWorker::executeDynamicallyLoadedCode (SEC-EXEC-001)...
+13/10/2026 04:54:02 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Dynamic Code Loading Dynamic DEX loading via DexClassLoader.'
+13/10/2026 04:54:18 PM | INFO     | investigator.py:investigate_leads_node:153 - Result: [VULNERABLE] SEC-EXEC-001 (Severity: CRITICAL, Conf: 95%)
+13/10/2026 04:54:18 PM | INFO     | investigator.py:investigate_leads_node:142 - [7/16] Investigating com.BugBazaar.utils.AppInitializationManager::isFirstRun (SEC-STORE-001)...
+13/10/2026 04:54:18 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+13/10/2026 04:54:34 PM | DEBUG    | investigator.py:investigate_leads_node:159 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+13/10/2026 04:54:34 PM | INFO     | investigator.py:investigate_leads_node:142 - [8/16] Investigating com.BugBazaar.utils.AppInitializationManager::markFirstRunDone (SEC-STORE-001)...
+13/10/2026 04:54:34 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+13/10/2026 04:54:45 PM | DEBUG    | investigator.py:investigate_leads_node:159 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+13/10/2026 04:54:45 PM | INFO     | investigator.py:investigate_leads_node:142 - [9/16] Investigating com.BugBazaar.ui.SessionManager::<init> (SEC-STORE-001)...
+13/10/2026 04:54:45 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+13/10/2026 04:54:59 PM | DEBUG    | investigator.py:investigate_leads_node:159 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+13/10/2026 04:54:59 PM | INFO     | investigator.py:investigate_leads_node:142 - [10/16] Investigating com.BugBazaar.controller.UserAuthSave::<init> (SEC-STORE-001)...
+13/10/2026 04:54:59 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+13/10/2026 04:55:12 PM | DEBUG    | investigator.py:investigate_leads_node:159 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+13/10/2026 04:55:12 PM | INFO     | investigator.py:investigate_leads_node:142 - [11/16] Investigating com.BugBazaar.controller.UserAuthSave::<init> (SEC-STORE-001)...
+13/10/2026 04:55:12 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+13/10/2026 04:55:29 PM | DEBUG    | investigator.py:investigate_leads_node:159 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+13/10/2026 04:55:29 PM | INFO     | investigator.py:investigate_leads_node:142 - [12/16] Investigating com.BugBazaar.ui.cart.addtimestamp::saveCartStartTime (SEC-STORE-001)...
+13/10/2026 04:55:29 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+13/10/2026 04:55:49 PM | DEBUG    | investigator.py:investigate_leads_node:159 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+13/10/2026 04:55:49 PM | INFO     | investigator.py:investigate_leads_node:142 - [13/16] Investigating com.BugBazaar.utils.CustomDialog$1::onClick (SEC-COMP-001)...
+13/10/2026 04:55:49 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+13/10/2026 04:56:09 PM | DEBUG    | investigator.py:investigate_leads_node:159 - Lead classified as FALSE_POSITIVE: SEC-COMP-001
+13/10/2026 04:56:09 PM | INFO     | investigator.py:investigate_leads_node:142 - [14/16] Investigating com.BugBazaar.ui.ProductAdapter$1::onClick (SEC-COMP-001)...
+13/10/2026 04:56:09 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+13/10/2026 04:56:27 PM | DEBUG    | investigator.py:investigate_leads_node:159 - Lead classified as FALSE_POSITIVE: SEC-COMP-001
+13/10/2026 04:56:27 PM | INFO     | investigator.py:investigate_leads_node:142 - [15/16] Investigating com.BugBazaar.ui.detectAppInt.checkroot::checkRootBeer (SEC-COMP-001)...
+13/10/2026 04:56:27 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+13/10/2026 04:56:49 PM | DEBUG    | investigator.py:investigate_leads_node:159 - Lead classified as FALSE_POSITIVE: SEC-COMP-001
+13/10/2026 04:56:49 PM | INFO     | investigator.py:investigate_leads_node:142 - [16/16] Investigating com.BugBazaar.ui.ContactsPack.ContactAdapter::openSmsApp (SEC-COMP-001)...
+13/10/2026 04:56:49 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+13/10/2026 04:57:09 PM | DEBUG    | investigator.py:investigate_leads_node:159 - Lead classified as FALSE_POSITIVE: SEC-COMP-001
+13/10/2026 04:57:09 PM | INFO     | investigator.py:investigate_leads_node:164 - Investigation complete. Generated 6 actionable findings.
+13/10/2026 05:06:14 PM | INFO     | scan.py:run_scan:40 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+13/10/2026 06:10:21 PM | INFO     | scan.py:run_scan:40 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+13/10/2026 06:11:12 PM | INFO     | scan.py:run_scan:40 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+13/10/2026 06:11:12 PM | INFO     | tools.py:decompile_apk:27 - Decompiling /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk...
+13/10/2026 06:11:34 PM | INFO     | tools.py:decompile_apk:48 - Successfully decompiled BugBazaar_v1.2.1.apk to /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1_decompiled.
+Manifest location: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1_decompiled/AndroidManifest.xml
+
+13/10/2026 06:11:34 PM | INFO     | scan_secrets.py:scan_secrets_node:64 - Scanning for hardcoded secrets...
+13/10/2026 06:12:08 PM | INFO     | scan_secrets.py:scan_secrets_node:157 - Scan complete. Found 2 unique candidate secret(s).
+13/10/2026 06:12:08 PM | INFO     | triage_secrets.py:triage_secret_node:38 - Triaging 2 candidate secret(s) with LLM...
+13/10/2026 06:12:09 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+13/10/2026 06:12:17 PM | INFO     | analyze_manifest.py:analyze_manifest_node:32 - Parsing AndroidManifest.xml for components and flags...
+13/10/2026 06:12:17 PM | INFO     | analyze_manifest.py:analyze_manifest_node:158 - Manifest parsed: 64 components (21 exported), 15 permissions discovered.
+13/10/2026 06:12:17 PM | INFO     | sink_scanner.py:scan_sink_node:141 - Initiating sink scan across 3 smali roots...
+13/10/2026 06:12:18 PM | INFO     | sink_scanner.py:scan_sink_node:160 - Sink scan completed: 16 leads identified (5 in exported components).
+13/10/2026 06:12:18 PM | INFO     | investigator.py:investigate_leads_node:135 - Starting audit loop across 16 candidate leads...
+13/10/2026 06:12:18 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+13/10/2026 06:12:34 PM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+13/10/2026 06:12:34 PM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+13/10/2026 06:12:34 PM | INFO     | investigator.py:investigate_leads_node:144 - [1/16] Investigating com.BugBazaar.ui.TermsAndConditionsActivity::setupwebview (SEC-WEB-001)...
+13/10/2026 06:12:34 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+13/10/2026 06:12:36 PM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+13/10/2026 06:13:17 PM | INFO     | investigator.py:investigate_leads_node:155 - Result: [VULNERABLE] SEC-WEB-001 (Severity: HIGH, Conf: 100%)
+13/10/2026 06:13:17 PM | INFO     | investigator.py:investigate_leads_node:144 - [2/16] Investigating com.BugBazaar.ui.Contact_us::onCreate (SEC-WEB-001)...
+13/10/2026 06:13:17 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+13/10/2026 06:13:42 PM | INFO     | investigator.py:investigate_leads_node:155 - Result: [VULNERABLE] SEC-WEB-001 (Severity: CRITICAL, Conf: 100%)
+13/10/2026 06:13:42 PM | INFO     | investigator.py:investigate_leads_node:144 - [3/16] Investigating com.BugBazaar.ui.Deeplink::setupwebview (SEC-WEB-001)...
+13/10/2026 06:13:42 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+13/10/2026 06:13:56 PM | INFO     | investigator.py:investigate_leads_node:155 - Result: [VULNERABLE] SEC-WEB-001 (Severity: CRITICAL, Conf: 100%)
+13/10/2026 06:13:56 PM | INFO     | investigator.py:investigate_leads_node:144 - [4/16] Investigating com.BugBazaar.ui.components.CustomBR::onReceive (SEC-COMP-001)...
+13/10/2026 06:13:56 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+13/10/2026 06:14:24 PM | INFO     | investigator.py:investigate_leads_node:155 - Result: [VULNERABLE] SEC-COMP-001 (Severity: MEDIUM, Conf: 90%)
+13/10/2026 06:14:24 PM | INFO     | investigator.py:investigate_leads_node:144 - [5/16] Investigating com.BugBazaar.ui.TermsAndConditionsActivity::startWebView (SEC-WEB-002)...
+13/10/2026 06:14:24 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security Add JavascriptInterface exposed on WebView.'
+13/10/2026 06:14:38 PM | INFO     | investigator.py:investigate_leads_node:155 - Result: [VULNERABLE] SEC-WEB-002 (Severity: HIGH, Conf: 90%)
+13/10/2026 06:14:38 PM | INFO     | investigator.py:investigate_leads_node:144 - [6/16] Investigating com.BugBazaar.utils.checkWorker::executeDynamicallyLoadedCode (SEC-EXEC-001)...
+13/10/2026 06:14:38 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Dynamic Code Loading Dynamic DEX loading via DexClassLoader.'
+13/10/2026 06:14:56 PM | INFO     | investigator.py:investigate_leads_node:155 - Result: [VULNERABLE] SEC-EXEC-001 (Severity: CRITICAL, Conf: 95%)
+13/10/2026 06:14:56 PM | INFO     | investigator.py:investigate_leads_node:144 - [7/16] Investigating com.BugBazaar.utils.AppInitializationManager::isFirstRun (SEC-STORE-001)...
+13/10/2026 06:14:56 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+13/10/2026 06:15:11 PM | DEBUG    | investigator.py:investigate_leads_node:161 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+13/10/2026 06:15:11 PM | INFO     | investigator.py:investigate_leads_node:144 - [8/16] Investigating com.BugBazaar.utils.AppInitializationManager::markFirstRunDone (SEC-STORE-001)...
+13/10/2026 06:15:11 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+13/10/2026 06:15:25 PM | DEBUG    | investigator.py:investigate_leads_node:161 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+13/10/2026 06:15:25 PM | INFO     | investigator.py:investigate_leads_node:144 - [9/16] Investigating com.BugBazaar.ui.SessionManager::<init> (SEC-STORE-001)...
+13/10/2026 06:15:25 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+13/10/2026 06:15:43 PM | DEBUG    | investigator.py:investigate_leads_node:161 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+13/10/2026 06:15:43 PM | INFO     | investigator.py:investigate_leads_node:144 - [10/16] Investigating com.BugBazaar.controller.UserAuthSave::<init> (SEC-STORE-001)...
+13/10/2026 06:15:43 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+13/10/2026 06:15:57 PM | DEBUG    | investigator.py:investigate_leads_node:161 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+13/10/2026 06:15:57 PM | INFO     | investigator.py:investigate_leads_node:144 - [11/16] Investigating com.BugBazaar.controller.UserAuthSave::<init> (SEC-STORE-001)...
+13/10/2026 06:15:57 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+13/10/2026 06:16:14 PM | DEBUG    | investigator.py:investigate_leads_node:161 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+13/10/2026 06:16:14 PM | INFO     | investigator.py:investigate_leads_node:144 - [12/16] Investigating com.BugBazaar.ui.cart.addtimestamp::saveCartStartTime (SEC-STORE-001)...
+13/10/2026 06:16:14 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+13/10/2026 06:16:30 PM | DEBUG    | investigator.py:investigate_leads_node:161 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+13/10/2026 06:16:30 PM | INFO     | investigator.py:investigate_leads_node:144 - [13/16] Investigating com.BugBazaar.utils.CustomDialog$1::onClick (SEC-COMP-001)...
+13/10/2026 06:16:30 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+13/10/2026 06:16:49 PM | DEBUG    | investigator.py:investigate_leads_node:161 - Lead classified as FALSE_POSITIVE: SEC-COMP-001
+13/10/2026 06:16:49 PM | INFO     | investigator.py:investigate_leads_node:144 - [14/16] Investigating com.BugBazaar.ui.ProductAdapter$1::onClick (SEC-COMP-001)...
+13/10/2026 06:16:49 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+13/10/2026 06:17:08 PM | DEBUG    | investigator.py:investigate_leads_node:161 - Lead classified as FALSE_POSITIVE: SEC-COMP-001
+13/10/2026 06:17:08 PM | INFO     | investigator.py:investigate_leads_node:144 - [15/16] Investigating com.BugBazaar.ui.detectAppInt.checkroot::checkRootBeer (SEC-COMP-001)...
+13/10/2026 06:17:08 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+13/10/2026 06:17:27 PM | DEBUG    | investigator.py:investigate_leads_node:161 - Lead classified as FALSE_POSITIVE: SEC-COMP-001
+13/10/2026 06:17:27 PM | INFO     | investigator.py:investigate_leads_node:144 - [16/16] Investigating com.BugBazaar.ui.ContactsPack.ContactAdapter::openSmsApp (SEC-COMP-001)...
+13/10/2026 06:17:27 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+13/10/2026 06:17:56 PM | DEBUG    | investigator.py:investigate_leads_node:161 - Lead classified as FALSE_POSITIVE: SEC-COMP-001
+13/10/2026 06:17:56 PM | INFO     | investigator.py:investigate_leads_node:166 - Investigation complete. Generated 6 actionable findings.
+13/10/2026 06:32:27 PM | INFO     | scan.py:run_scan:40 - Initializing analysis for: /home/vivek/sample_apps/reversing_example/io.hextree.reversingexample.apk
+13/10/2026 06:32:28 PM | INFO     | tools.py:decompile_apk:27 - Decompiling /home/vivek/sample_apps/reversing_example/io.hextree.reversingexample.apk...
+13/10/2026 06:32:43 PM | INFO     | tools.py:decompile_apk:48 - Successfully decompiled io.hextree.reversingexample.apk to /home/vivek/sample_apps/reversing_example/io.hextree.reversingexample_decompiled.
+Manifest location: /home/vivek/sample_apps/reversing_example/io.hextree.reversingexample_decompiled/AndroidManifest.xml
+
+13/10/2026 06:32:43 PM | INFO     | scan_secrets.py:scan_secrets_node:64 - Scanning for hardcoded secrets...
+13/10/2026 06:33:05 PM | INFO     | scan_secrets.py:scan_secrets_node:157 - Scan complete. Found 1 unique candidate secret(s).
+13/10/2026 06:33:05 PM | INFO     | triage_secrets.py:triage_secret_node:38 - Triaging 1 candidate secret(s) with LLM...
+13/10/2026 06:33:06 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+13/10/2026 06:33:09 PM | INFO     | analyze_manifest.py:analyze_manifest_node:32 - Parsing AndroidManifest.xml for components and flags...
+13/10/2026 06:33:09 PM | INFO     | analyze_manifest.py:analyze_manifest_node:158 - Manifest parsed: 8 components (3 exported), 1 permissions discovered.
+13/10/2026 06:33:09 PM | INFO     | sink_scanner.py:scan_sink_node:141 - Initiating sink scan across 5 smali roots...
+13/10/2026 06:33:09 PM | INFO     | sink_scanner.py:scan_sink_node:160 - Sink scan completed: 0 leads identified (0 in exported components).
+13/10/2026 06:33:09 PM | INFO     | investigator.py:investigate_leads_node:132 - No candidate leads available in state to investigate.
