@@ -2,9 +2,15 @@ import sys
 from pathlib import Path
 
 from langchain_core.runnables import RunnableConfig
+from rich.console import Console
 
 from ava.agent.graph import build_app
+from ava.agent.schemas.audit import LeadAuditResult
 from ava.agent.state import AgentState
+from ava.commands.ui.audit_view import (
+    render_audit_summary_table,
+    render_lead_detail_card,
+)
 from ava.commands.ui.manifest_view import render_manifest_tables
 from ava.commands.ui.secrets_view import render_secrets_table
 from ava.commands.utils import get_apk_fingerprint
@@ -12,6 +18,7 @@ from ava.config.database import get_checkpointer
 from ava.config.logger import get_logger
 
 logger = get_logger()
+console = Console()
 
 
 async def run_scan(target: Path, fresh: bool = False):
@@ -50,6 +57,8 @@ async def run_scan(target: Path, fresh: bool = False):
                 "verified_secrets": [],
                 "decompiled_path": "",
                 "manifest_analysis": {},
+                "candidate_leads": [],
+                "audit_findings": [],
             }
         )
 
@@ -64,6 +73,28 @@ async def run_scan(target: Path, fresh: bool = False):
             # 2. Print Manifest Table
             if "manifest_analysis" in result:
                 render_manifest_tables(result["manifest_analysis"])
+
+            # 3. Vulnerability Audit Findings
+            raw_findings = result.get("audit_findings", [])
+            if raw_findings:
+                # Convert dicts back to schema instances if deserialized as dicts
+                findings: list[LeadAuditResult] = [
+                    f
+                    if isinstance(f, LeadAuditResult)
+                    else LeadAuditResult.model_validate(f)
+                    for f in raw_findings
+                ]
+
+                # Executive Summary Table
+                render_audit_summary_table(findings, console)
+
+                # Individual Finding Detail Cards
+                for finding in findings:
+                    render_lead_detail_card(finding, console)
+            else:
+                console.print(
+                    "\n[dim yellow]No verified vulnerability findings to display.[/]"
+                )
 
         except Exception:
             logger.exception("Error executing agent workflow")
