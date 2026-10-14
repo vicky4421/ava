@@ -37,6 +37,40 @@ class PayloadFile(BaseModel):
     )
 
 
+class ReachabilityStatus(StrEnum):
+    DIRECTLY_EXPOSED = (
+        "DIRECTLY_EXPOSED"  # Exported component directly handling external input
+    )
+    INTERNALLY_REACHABLE = "INTERNALLY_REACHABLE"  # Non-exported, reachable via internal IPC or shared logic
+    UNREACHABLE = "UNREACHABLE"  # Dead code or guarded by rigorous pre-checks
+    INDETERMINATE = "INDETERMINATE"  # Cannot determine solely from local bytecode slice
+
+
+class TaintDataFlow(BaseModel):
+    model_config = {"extra": "ignore"}
+
+    source: str = Field(
+        description="Entry point or source of input (e.g., 'Intent.getData()', 'Intent.getStringExtra(\"url\")', 'Hardcoded Constant')."
+    )
+    sink: str = Field(
+        description="Dangerous method or API receiving the data (e.g., 'WebView.loadUrl', 'DexClassLoader.<init>')."
+    )
+    extracted_extra_keys: list[str] = Field(
+        default_factory=list,
+        description=(
+            "List of exact Intent extra keys or query parameters identified"
+            " (e.g., ['url', 'redirect_uri', 'filename'])."
+        ),
+    )
+    sanitizer_present: bool = Field(
+        default=False,
+        description="True if validation, origin checks, or input sanitization logic exists between source and sink.",
+    )
+    taint_path_summary: str = Field(
+        description="Concise description of how data traverses from the source to the sink."
+    )
+
+
 class LeadAuditResult(BaseModel):
     model_config = {"extra": "ignore"}
 
@@ -51,6 +85,13 @@ class LeadAuditResult(BaseModel):
     cwe_id: str | None = Field(
         default=None,
         description="Standard CWE identifier (e.g., 'CWE-749: Exposed Dangerous Method or Interface')",
+    )
+    reachability: ReachabilityStatus = Field(
+        description="Assessment of whether external untrusted input can reach this sink."
+    )
+    data_flow: TaintDataFlow | None = Field(
+        default=None,
+        description="Taint tracking analysis tracing source-to-sink propagation.",
     )
     evidence_code: str | None = Field(
         default=None,
