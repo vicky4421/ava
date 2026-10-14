@@ -7,7 +7,12 @@ from rich.syntax import Syntax
 from rich.table import Table
 from rich.text import Text
 
-from ava.agent.schemas.audit import LeadAuditResult, SeverityLevel, TriageVerdict
+from ava.agent.schemas.audit import (
+    LeadAuditResult,
+    ReachabilityStatus,
+    SeverityLevel,
+    TriageVerdict,
+)
 
 SEVERITY_STYLES = {
     SeverityLevel.CRITICAL: "bold bright_red",
@@ -15,6 +20,13 @@ SEVERITY_STYLES = {
     SeverityLevel.MEDIUM: "yellow",
     SeverityLevel.LOW: "blue",
     SeverityLevel.INFO: "dim cyan",
+}
+
+REACHABILITY_STYLES = {
+    ReachabilityStatus.DIRECTLY_EXPOSED: "bold bright_red",
+    ReachabilityStatus.INTERNALLY_REACHABLE: "yellow",
+    ReachabilityStatus.UNREACHABLE: "dim green",
+    ReachabilityStatus.INDETERMINATE: "dim",
 }
 
 VERDICT_STYLES = {
@@ -80,12 +92,15 @@ def render_lead_detail_card(result: LeadAuditResult, console: Console) -> None:
     # Header section
     card_sections: list[str | Syntax | Panel] = []
 
+    reach_style = REACHABILITY_STYLES.get(result.reachability, "white")
+
     header_text = (
         f"[bold cyan]Target:[/] {result.class_name}::{result.method_name}\n"
         f"[bold cyan]Verdict:[/] [{v_style}]{result.verdict.value}[/]   |   "
         f"[bold cyan]Severity:[/] [{s_style}]{result.severity.value}[/]   |   "
         f"[bold cyan]Confidence:[/] {result.confidence * 100:.1f}%\n"
         f"[bold cyan]CWE:[/] {result.cwe_id or 'Unassigned'}"
+        f"[bold cyan]Reachability:[/] [{reach_style}]{result.reachability.value}[/]"
     )
     card_sections.append(header_text)
 
@@ -101,7 +116,24 @@ def render_lead_detail_card(result: LeadAuditResult, console: Console) -> None:
         )
         card_sections.append(evidence_syntax)
 
-    # Technical Analysis
+    # Taint Data Flow Analysis
+    if result.data_flow:
+        sanitizer_tag = (
+            "[green]Yes[/]"
+            if result.data_flow.sanitizer_present
+            else "[red]No / None Detected[/]"
+        )
+        flow_info = (
+            f"\n[bold cyan]Taint Analysis:[/] \n"
+            f"  • [bold]Source:[/] {result.data_flow.source}\n"
+            f"  • [bold]Sink:[/]   {result.data_flow.sink}\n"
+            f"  • [bold]Extracted Extra Keys:[/]   {result.data_flow.extracted_extra_keys}\n"
+            f"  • [bold]Sanitizer Present:[/] {sanitizer_tag}\n"
+            f"  • [bold]Propagation:[/] {result.data_flow.taint_path_summary}"
+        )
+        card_sections.append(flow_info)
+
+    # Technical Analysis and fix
     card_sections.append(
         f"\n[bold cyan]Technical Analysis:[/]\n{result.analysis.strip()}"
     )
