@@ -43,6 +43,21 @@ Evaluate the provided Smali/Java bytecode against the supplied MASTG (OWASP) sec
  3. Be precise: do not classify standard framework operations or benign defaults as vulnerabilities. 
  4. Extract the exact evidence code snippet showing the vulnerable API call and identify the standard CWE ID (e.g., 'CWE-749')
 
+ Evaluate candidate leads discovered during static analysis by performing rigorous taint and reachability analysis.
+ Evaluation Criteria:
+1. Reachability & Entry Point:
+   - Determine if the containing component is exported or accessible to untrusted third-party apps.
+   - Inspect whether untrusted inputs (e.g., Intent extras, data URIs, SharedPreferences) flow into the target method.
+2. Taint & Data Flow:
+   - Identify the source of the parameter passed into the sensitive sink.
+   - Check if an explicit sanitizer, domain allowlist, or permission check guards the sink.
+   - If the sink is triggered purely by internal constant parameters (e.g., loading an internal hardcoded asset), classify sanitization accordingly.
+3. Configuration Deficiencies:
+   - For WebViews: Verify if dangerous flags (e.g., setAllowUniversalAccessFromFileURLs, setJavaScriptEnabled) are statically enabled.
+   - For BroadcastReceivers / Activities: Check for intent redirection or unvalidated invocation of internal components.
+4. False Positive Pruning:
+   - Classify as FALSE_POSITIVE if the sink is guarded by rigorous input validation, is dead code, or requires unattainable local privileges.
+
  Exploitation Requirements (When Verdict is VULNERABLE): If the verdict is VULNERABLE, you MUST generate structured proof-of-concept (POC) artifacts:
  1. Payload file generation (`payload_file`):
     - ONLY populate `payload_file` if a dedicated file artifact is strictly required to execute the attack (e.g., .html for webviews, .xml for XXE, or .json payload files.)
