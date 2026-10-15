@@ -99,7 +99,7 @@ def render_lead_detail_card(result: LeadAuditResult, console: Console) -> None:
         f"[bold cyan]Verdict:[/] [{v_style}]{result.verdict.value}[/]   |   "
         f"[bold cyan]Severity:[/] [{s_style}]{result.severity.value}[/]   |   "
         f"[bold cyan]Confidence:[/] {result.confidence * 100:.1f}%\n"
-        f"[bold cyan]CWE:[/] {result.cwe_id or 'Unassigned'}"
+        f"[bold cyan]CWE:[/] {result.cwe_id or 'Unassigned'}   |   "
         f"[bold cyan]Reachability:[/] [{reach_style}]{result.reachability.value}[/]"
     )
     card_sections.append(header_text)
@@ -121,7 +121,7 @@ def render_lead_detail_card(result: LeadAuditResult, console: Console) -> None:
         sanitizer_tag = (
             "[green]Yes[/]"
             if result.data_flow.sanitizer_present
-            else "[red]No / None Detected[/]"
+            else "[bright_red]No / None Detected[/]"
         )
         flow_info = (
             f"\n[bold cyan]Taint Analysis:[/] \n"
