@@ -1055,3 +1055,572 @@ Manifest location: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1_decompiled
 13/10/2026 10:00:31 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
 13/10/2026 10:01:10 PM | DEBUG    | investigator.py:investigate_leads_node:176 - Lead classified as FALSE_POSITIVE: SEC-COMP-001
 13/10/2026 10:01:10 PM | INFO     | investigator.py:investigate_leads_node:181 - Investigation complete. Generated 6 actionable findings.
+14/10/2026 03:06:21 PM | INFO     | scan.py:run_scan:40 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+14/10/2026 03:06:21 PM | INFO     | decompile.py:decompile_node:28 - Using existing decompiled directory: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1_decompiled
+14/10/2026 03:06:21 PM | INFO     | decompile.py:decompile_node:31 - Initializing Androguard cross-reference tables...
+14/10/2026 03:06:46 PM | ERROR    | cli.py:main:51 - Analysis aborted by user.
+14/10/2026 03:07:41 PM | INFO     | scan.py:run_scan:40 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+14/10/2026 03:07:41 PM | INFO     | decompile.py:decompile_node:28 - Using existing decompiled directory: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1_decompiled
+14/10/2026 03:07:41 PM | INFO     | decompile.py:decompile_node:31 - Initializing Androguard cross-reference tables...
+14/10/2026 03:08:59 PM | INFO     | scan_secrets.py:scan_secrets_node:64 - Scanning for hardcoded secrets...
+14/10/2026 03:09:42 PM | INFO     | scan_secrets.py:scan_secrets_node:157 - Scan complete. Found 2 unique candidate secret(s).
+14/10/2026 03:09:42 PM | INFO     | triage_secrets.py:triage_secret_node:38 - Triaging 2 candidate secret(s) with LLM...
+14/10/2026 03:09:42 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+14/10/2026 03:09:44 PM | INFO     | analyze_manifest.py:analyze_manifest_node:32 - Parsing AndroidManifest.xml for components and flags...
+14/10/2026 03:09:44 PM | INFO     | analyze_manifest.py:analyze_manifest_node:158 - Manifest parsed: 64 components (21 exported), 15 permissions discovered.
+14/10/2026 03:09:44 PM | INFO     | sink_scanner.py:scan_sink_node:141 - Initiating sink scan across 3 smali roots...
+14/10/2026 03:09:44 PM | INFO     | sink_scanner.py:scan_sink_node:160 - Sink scan completed: 16 leads identified (5 in exported components).
+14/10/2026 03:09:44 PM | INFO     | investigator.py:investigate_leads_node:182 - Starting audit loop across 16 candidate leads...
+14/10/2026 03:09:44 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+14/10/2026 03:09:52 PM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+14/10/2026 03:09:52 PM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+14/10/2026 03:09:52 PM | INFO     | investigator.py:investigate_leads_node:190 - Starting audit loop across 16 candidate leads...
+14/10/2026 03:09:52 PM | INFO     | investigator.py:investigate_leads_node:197 - [1/16] Investigating com.BugBazaar.ui.TermsAndConditionsActivity::setupwebview (SEC-WEB-001)...
+14/10/2026 03:09:52 PM | ERROR    | investigator.py:investigate_leads_node:217 - Failed to audit lead SEC-WEB-001 at com.BugBazaar.ui.TermsAndConditionsActivity::setupwebview
+Traceback (most recent call last):
+  File "/home/vivek/ava/src/ava/agent/nodes/investigator.py", line 202, in investigate_leads_node
+    result = _investigate_single_lead(
+        lead=dict(lead), retriever=retriever, llm=llm, dx=dx
+    )
+  File "/home/vivek/ava/src/ava/agent/nodes/investigator.py", line 110, in _investigate_single_lead
+    callers = trace_upstream_callers(
+        dx=dx,
+        target_class_smali=lead.get("class_name", ""),
+        target_method=lead.get("method_name", ""),
+    )
+  File "/home/vivek/ava/src/ava/tools/callgraph.py", line 36, in trace_upstream_callers
+    caller_name = xref_method.get_name()
+                  ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MethodAnalysis' object has no attribute 'get_name'
+14/10/2026 03:09:52 PM | INFO     | investigator.py:investigate_leads_node:197 - [2/16] Investigating com.BugBazaar.ui.Contact_us::onCreate (SEC-WEB-001)...
+14/10/2026 03:09:52 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+14/10/2026 03:09:54 PM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+14/10/2026 03:10:10 PM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-WEB-001 (Severity: CRITICAL, Conf: 100%)
+14/10/2026 03:10:10 PM | INFO     | investigator.py:investigate_leads_node:197 - [3/16] Investigating com.BugBazaar.ui.Deeplink::setupwebview (SEC-WEB-001)...
+14/10/2026 03:10:10 PM | ERROR    | investigator.py:investigate_leads_node:217 - Failed to audit lead SEC-WEB-001 at com.BugBazaar.ui.Deeplink::setupwebview
+Traceback (most recent call last):
+  File "/home/vivek/ava/src/ava/agent/nodes/investigator.py", line 202, in investigate_leads_node
+    result = _investigate_single_lead(
+        lead=dict(lead), retriever=retriever, llm=llm, dx=dx
+    )
+  File "/home/vivek/ava/src/ava/agent/nodes/investigator.py", line 110, in _investigate_single_lead
+    callers = trace_upstream_callers(
+        dx=dx,
+        target_class_smali=lead.get("class_name", ""),
+        target_method=lead.get("method_name", ""),
+    )
+  File "/home/vivek/ava/src/ava/tools/callgraph.py", line 36, in trace_upstream_callers
+    caller_name = xref_method.get_name()
+                  ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MethodAnalysis' object has no attribute 'get_name'
+14/10/2026 03:10:10 PM | INFO     | investigator.py:investigate_leads_node:197 - [4/16] Investigating com.BugBazaar.ui.components.CustomBR::onReceive (SEC-COMP-001)...
+14/10/2026 03:10:10 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+14/10/2026 03:10:27 PM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-COMP-001 (Severity: MEDIUM, Conf: 90%)
+14/10/2026 03:10:27 PM | INFO     | investigator.py:investigate_leads_node:197 - [5/16] Investigating com.BugBazaar.ui.TermsAndConditionsActivity::startWebView (SEC-WEB-002)...
+14/10/2026 03:10:27 PM | ERROR    | investigator.py:investigate_leads_node:217 - Failed to audit lead SEC-WEB-002 at com.BugBazaar.ui.TermsAndConditionsActivity::startWebView
+Traceback (most recent call last):
+  File "/home/vivek/ava/src/ava/agent/nodes/investigator.py", line 202, in investigate_leads_node
+    result = _investigate_single_lead(
+        lead=dict(lead), retriever=retriever, llm=llm, dx=dx
+    )
+  File "/home/vivek/ava/src/ava/agent/nodes/investigator.py", line 110, in _investigate_single_lead
+    callers = trace_upstream_callers(
+        dx=dx,
+        target_class_smali=lead.get("class_name", ""),
+        target_method=lead.get("method_name", ""),
+    )
+  File "/home/vivek/ava/src/ava/tools/callgraph.py", line 36, in trace_upstream_callers
+    caller_name = xref_method.get_name()
+                  ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MethodAnalysis' object has no attribute 'get_name'
+14/10/2026 03:10:27 PM | INFO     | investigator.py:investigate_leads_node:197 - [6/16] Investigating com.BugBazaar.utils.checkWorker::executeDynamicallyLoadedCode (SEC-EXEC-001)...
+14/10/2026 03:10:27 PM | ERROR    | investigator.py:investigate_leads_node:217 - Failed to audit lead SEC-EXEC-001 at com.BugBazaar.utils.checkWorker::executeDynamicallyLoadedCode
+Traceback (most recent call last):
+  File "/home/vivek/ava/src/ava/agent/nodes/investigator.py", line 202, in investigate_leads_node
+    result = _investigate_single_lead(
+        lead=dict(lead), retriever=retriever, llm=llm, dx=dx
+    )
+  File "/home/vivek/ava/src/ava/agent/nodes/investigator.py", line 110, in _investigate_single_lead
+    callers = trace_upstream_callers(
+        dx=dx,
+        target_class_smali=lead.get("class_name", ""),
+        target_method=lead.get("method_name", ""),
+    )
+  File "/home/vivek/ava/src/ava/tools/callgraph.py", line 36, in trace_upstream_callers
+    caller_name = xref_method.get_name()
+                  ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MethodAnalysis' object has no attribute 'get_name'
+14/10/2026 03:10:27 PM | INFO     | investigator.py:investigate_leads_node:197 - [7/16] Investigating com.BugBazaar.utils.AppInitializationManager::isFirstRun (SEC-STORE-001)...
+14/10/2026 03:10:27 PM | ERROR    | investigator.py:investigate_leads_node:217 - Failed to audit lead SEC-STORE-001 at com.BugBazaar.utils.AppInitializationManager::isFirstRun
+Traceback (most recent call last):
+  File "/home/vivek/ava/src/ava/agent/nodes/investigator.py", line 202, in investigate_leads_node
+    result = _investigate_single_lead(
+        lead=dict(lead), retriever=retriever, llm=llm, dx=dx
+    )
+  File "/home/vivek/ava/src/ava/agent/nodes/investigator.py", line 110, in _investigate_single_lead
+    callers = trace_upstream_callers(
+        dx=dx,
+        target_class_smali=lead.get("class_name", ""),
+        target_method=lead.get("method_name", ""),
+    )
+  File "/home/vivek/ava/src/ava/tools/callgraph.py", line 36, in trace_upstream_callers
+    caller_name = xref_method.get_name()
+                  ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MethodAnalysis' object has no attribute 'get_name'
+14/10/2026 03:10:27 PM | INFO     | investigator.py:investigate_leads_node:197 - [8/16] Investigating com.BugBazaar.utils.AppInitializationManager::markFirstRunDone (SEC-STORE-001)...
+14/10/2026 03:10:27 PM | ERROR    | investigator.py:investigate_leads_node:217 - Failed to audit lead SEC-STORE-001 at com.BugBazaar.utils.AppInitializationManager::markFirstRunDone
+Traceback (most recent call last):
+  File "/home/vivek/ava/src/ava/agent/nodes/investigator.py", line 202, in investigate_leads_node
+    result = _investigate_single_lead(
+        lead=dict(lead), retriever=retriever, llm=llm, dx=dx
+    )
+  File "/home/vivek/ava/src/ava/agent/nodes/investigator.py", line 110, in _investigate_single_lead
+    callers = trace_upstream_callers(
+        dx=dx,
+        target_class_smali=lead.get("class_name", ""),
+        target_method=lead.get("method_name", ""),
+    )
+  File "/home/vivek/ava/src/ava/tools/callgraph.py", line 36, in trace_upstream_callers
+    caller_name = xref_method.get_name()
+                  ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MethodAnalysis' object has no attribute 'get_name'
+14/10/2026 03:10:27 PM | INFO     | investigator.py:investigate_leads_node:197 - [9/16] Investigating com.BugBazaar.ui.SessionManager::<init> (SEC-STORE-001)...
+14/10/2026 03:10:27 PM | ERROR    | investigator.py:investigate_leads_node:217 - Failed to audit lead SEC-STORE-001 at com.BugBazaar.ui.SessionManager::<init>
+Traceback (most recent call last):
+  File "/home/vivek/ava/src/ava/agent/nodes/investigator.py", line 202, in investigate_leads_node
+    result = _investigate_single_lead(
+        lead=dict(lead), retriever=retriever, llm=llm, dx=dx
+    )
+  File "/home/vivek/ava/src/ava/agent/nodes/investigator.py", line 110, in _investigate_single_lead
+    callers = trace_upstream_callers(
+        dx=dx,
+        target_class_smali=lead.get("class_name", ""),
+        target_method=lead.get("method_name", ""),
+    )
+  File "/home/vivek/ava/src/ava/tools/callgraph.py", line 36, in trace_upstream_callers
+    caller_name = xref_method.get_name()
+                  ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MethodAnalysis' object has no attribute 'get_name'
+14/10/2026 03:10:27 PM | INFO     | investigator.py:investigate_leads_node:197 - [10/16] Investigating com.BugBazaar.controller.UserAuthSave::<init> (SEC-STORE-001)...
+14/10/2026 03:10:27 PM | ERROR    | investigator.py:investigate_leads_node:217 - Failed to audit lead SEC-STORE-001 at com.BugBazaar.controller.UserAuthSave::<init>
+Traceback (most recent call last):
+  File "/home/vivek/ava/src/ava/agent/nodes/investigator.py", line 202, in investigate_leads_node
+    result = _investigate_single_lead(
+        lead=dict(lead), retriever=retriever, llm=llm, dx=dx
+    )
+  File "/home/vivek/ava/src/ava/agent/nodes/investigator.py", line 110, in _investigate_single_lead
+    callers = trace_upstream_callers(
+        dx=dx,
+        target_class_smali=lead.get("class_name", ""),
+        target_method=lead.get("method_name", ""),
+    )
+  File "/home/vivek/ava/src/ava/tools/callgraph.py", line 36, in trace_upstream_callers
+    caller_name = xref_method.get_name()
+                  ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MethodAnalysis' object has no attribute 'get_name'
+14/10/2026 03:10:27 PM | INFO     | investigator.py:investigate_leads_node:197 - [11/16] Investigating com.BugBazaar.controller.UserAuthSave::<init> (SEC-STORE-001)...
+14/10/2026 03:10:27 PM | ERROR    | investigator.py:investigate_leads_node:217 - Failed to audit lead SEC-STORE-001 at com.BugBazaar.controller.UserAuthSave::<init>
+Traceback (most recent call last):
+  File "/home/vivek/ava/src/ava/agent/nodes/investigator.py", line 202, in investigate_leads_node
+    result = _investigate_single_lead(
+        lead=dict(lead), retriever=retriever, llm=llm, dx=dx
+    )
+  File "/home/vivek/ava/src/ava/agent/nodes/investigator.py", line 110, in _investigate_single_lead
+    callers = trace_upstream_callers(
+        dx=dx,
+        target_class_smali=lead.get("class_name", ""),
+        target_method=lead.get("method_name", ""),
+    )
+  File "/home/vivek/ava/src/ava/tools/callgraph.py", line 36, in trace_upstream_callers
+    caller_name = xref_method.get_name()
+                  ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MethodAnalysis' object has no attribute 'get_name'
+14/10/2026 03:10:27 PM | INFO     | investigator.py:investigate_leads_node:197 - [12/16] Investigating com.BugBazaar.ui.cart.addtimestamp::saveCartStartTime (SEC-STORE-001)...
+14/10/2026 03:10:27 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+14/10/2026 03:10:40 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+14/10/2026 03:10:40 PM | INFO     | investigator.py:investigate_leads_node:197 - [13/16] Investigating com.BugBazaar.utils.CustomDialog$1::onClick (SEC-COMP-001)...
+14/10/2026 03:10:40 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+14/10/2026 03:10:56 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-COMP-001
+14/10/2026 03:10:56 PM | INFO     | investigator.py:investigate_leads_node:197 - [14/16] Investigating com.BugBazaar.ui.ProductAdapter$1::onClick (SEC-COMP-001)...
+14/10/2026 03:10:56 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+14/10/2026 03:11:11 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-COMP-001
+14/10/2026 03:11:11 PM | INFO     | investigator.py:investigate_leads_node:197 - [15/16] Investigating com.BugBazaar.ui.detectAppInt.checkroot::checkRootBeer (SEC-COMP-001)...
+14/10/2026 03:11:11 PM | ERROR    | investigator.py:investigate_leads_node:217 - Failed to audit lead SEC-COMP-001 at com.BugBazaar.ui.detectAppInt.checkroot::checkRootBeer
+Traceback (most recent call last):
+  File "/home/vivek/ava/src/ava/agent/nodes/investigator.py", line 202, in investigate_leads_node
+    result = _investigate_single_lead(
+        lead=dict(lead), retriever=retriever, llm=llm, dx=dx
+    )
+  File "/home/vivek/ava/src/ava/agent/nodes/investigator.py", line 110, in _investigate_single_lead
+    callers = trace_upstream_callers(
+        dx=dx,
+        target_class_smali=lead.get("class_name", ""),
+        target_method=lead.get("method_name", ""),
+    )
+  File "/home/vivek/ava/src/ava/tools/callgraph.py", line 36, in trace_upstream_callers
+    caller_name = xref_method.get_name()
+                  ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MethodAnalysis' object has no attribute 'get_name'
+14/10/2026 03:11:11 PM | INFO     | investigator.py:investigate_leads_node:197 - [16/16] Investigating com.BugBazaar.ui.ContactsPack.ContactAdapter::openSmsApp (SEC-COMP-001)...
+14/10/2026 03:11:11 PM | ERROR    | investigator.py:investigate_leads_node:217 - Failed to audit lead SEC-COMP-001 at com.BugBazaar.ui.ContactsPack.ContactAdapter::openSmsApp
+Traceback (most recent call last):
+  File "/home/vivek/ava/src/ava/agent/nodes/investigator.py", line 202, in investigate_leads_node
+    result = _investigate_single_lead(
+        lead=dict(lead), retriever=retriever, llm=llm, dx=dx
+    )
+  File "/home/vivek/ava/src/ava/agent/nodes/investigator.py", line 110, in _investigate_single_lead
+    callers = trace_upstream_callers(
+        dx=dx,
+        target_class_smali=lead.get("class_name", ""),
+        target_method=lead.get("method_name", ""),
+    )
+  File "/home/vivek/ava/src/ava/tools/callgraph.py", line 36, in trace_upstream_callers
+    caller_name = xref_method.get_name()
+                  ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MethodAnalysis' object has no attribute 'get_name'
+14/10/2026 03:11:11 PM | INFO     | investigator.py:investigate_leads_node:219 - Investigation complete. Generated 2 actionable findings.
+14/10/2026 03:19:15 PM | INFO     | scan.py:run_scan:40 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+14/10/2026 03:19:15 PM | INFO     | decompile.py:decompile_node:33 - Using existing decompiled directory: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1_decompiled
+14/10/2026 03:19:15 PM | INFO     | decompile.py:decompile_node:36 - Initializing Androguard cross-reference tables...
+14/10/2026 03:20:21 PM | INFO     | scan_secrets.py:scan_secrets_node:64 - Scanning for hardcoded secrets...
+14/10/2026 03:21:01 PM | INFO     | scan_secrets.py:scan_secrets_node:157 - Scan complete. Found 2 unique candidate secret(s).
+14/10/2026 03:21:01 PM | INFO     | triage_secrets.py:triage_secret_node:38 - Triaging 2 candidate secret(s) with LLM...
+14/10/2026 03:21:01 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+14/10/2026 03:21:02 PM | INFO     | analyze_manifest.py:analyze_manifest_node:32 - Parsing AndroidManifest.xml for components and flags...
+14/10/2026 03:21:03 PM | INFO     | analyze_manifest.py:analyze_manifest_node:158 - Manifest parsed: 64 components (21 exported), 15 permissions discovered.
+14/10/2026 03:21:03 PM | INFO     | sink_scanner.py:scan_sink_node:141 - Initiating sink scan across 3 smali roots...
+14/10/2026 03:21:03 PM | INFO     | sink_scanner.py:scan_sink_node:160 - Sink scan completed: 16 leads identified (5 in exported components).
+14/10/2026 03:21:03 PM | INFO     | investigator.py:investigate_leads_node:182 - Starting audit loop across 16 candidate leads...
+14/10/2026 03:21:03 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+14/10/2026 03:21:10 PM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+14/10/2026 03:21:10 PM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+14/10/2026 03:21:10 PM | INFO     | investigator.py:investigate_leads_node:190 - Starting audit loop across 16 candidate leads...
+14/10/2026 03:21:10 PM | INFO     | investigator.py:investigate_leads_node:197 - [1/16] Investigating com.BugBazaar.ui.TermsAndConditionsActivity::setupwebview (SEC-WEB-001)...
+14/10/2026 03:21:10 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+14/10/2026 03:21:12 PM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+14/10/2026 03:21:25 PM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-WEB-001 (Severity: CRITICAL, Conf: 100%)
+14/10/2026 03:21:25 PM | INFO     | investigator.py:investigate_leads_node:197 - [2/16] Investigating com.BugBazaar.ui.Contact_us::onCreate (SEC-WEB-001)...
+14/10/2026 03:21:25 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+14/10/2026 03:21:36 PM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-WEB-001 (Severity: CRITICAL, Conf: 100%)
+14/10/2026 03:21:36 PM | INFO     | investigator.py:investigate_leads_node:197 - [3/16] Investigating com.BugBazaar.ui.Deeplink::setupwebview (SEC-WEB-001)...
+14/10/2026 03:21:36 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+14/10/2026 03:21:46 PM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-WEB-001 (Severity: HIGH, Conf: 90%)
+14/10/2026 03:21:46 PM | INFO     | investigator.py:investigate_leads_node:197 - [4/16] Investigating com.BugBazaar.ui.components.CustomBR::onReceive (SEC-COMP-001)...
+14/10/2026 03:21:46 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+14/10/2026 03:22:00 PM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-COMP-001 (Severity: MEDIUM, Conf: 90%)
+14/10/2026 03:22:00 PM | INFO     | investigator.py:investigate_leads_node:197 - [5/16] Investigating com.BugBazaar.ui.TermsAndConditionsActivity::startWebView (SEC-WEB-002)...
+14/10/2026 03:22:00 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security Add JavascriptInterface exposed on WebView.'
+14/10/2026 03:22:11 PM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-WEB-002 (Severity: HIGH, Conf: 90%)
+14/10/2026 03:22:11 PM | INFO     | investigator.py:investigate_leads_node:197 - [6/16] Investigating com.BugBazaar.utils.checkWorker::executeDynamicallyLoadedCode (SEC-EXEC-001)...
+14/10/2026 03:22:11 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Dynamic Code Loading Dynamic DEX loading via DexClassLoader.'
+14/10/2026 03:22:22 PM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-EXEC-001 (Severity: CRITICAL, Conf: 90%)
+14/10/2026 03:22:22 PM | INFO     | investigator.py:investigate_leads_node:197 - [7/16] Investigating com.BugBazaar.utils.AppInitializationManager::isFirstRun (SEC-STORE-001)...
+14/10/2026 03:22:22 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+14/10/2026 03:22:32 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+14/10/2026 03:22:32 PM | INFO     | investigator.py:investigate_leads_node:197 - [8/16] Investigating com.BugBazaar.utils.AppInitializationManager::markFirstRunDone (SEC-STORE-001)...
+14/10/2026 03:22:32 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+14/10/2026 03:22:44 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+14/10/2026 03:22:44 PM | INFO     | investigator.py:investigate_leads_node:197 - [9/16] Investigating com.BugBazaar.ui.SessionManager::<init> (SEC-STORE-001)...
+14/10/2026 03:22:44 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+14/10/2026 03:22:57 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+14/10/2026 03:22:57 PM | INFO     | investigator.py:investigate_leads_node:197 - [10/16] Investigating com.BugBazaar.controller.UserAuthSave::<init> (SEC-STORE-001)...
+14/10/2026 03:22:57 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+14/10/2026 03:23:09 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+14/10/2026 03:23:09 PM | INFO     | investigator.py:investigate_leads_node:197 - [11/16] Investigating com.BugBazaar.controller.UserAuthSave::<init> (SEC-STORE-001)...
+14/10/2026 03:23:09 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+14/10/2026 03:23:21 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+14/10/2026 03:23:21 PM | INFO     | investigator.py:investigate_leads_node:197 - [12/16] Investigating com.BugBazaar.ui.cart.addtimestamp::saveCartStartTime (SEC-STORE-001)...
+14/10/2026 03:23:21 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+14/10/2026 03:23:35 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+14/10/2026 03:23:35 PM | INFO     | investigator.py:investigate_leads_node:197 - [13/16] Investigating com.BugBazaar.utils.CustomDialog$1::onClick (SEC-COMP-001)...
+14/10/2026 03:23:35 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+14/10/2026 03:23:50 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-COMP-001
+14/10/2026 03:23:50 PM | INFO     | investigator.py:investigate_leads_node:197 - [14/16] Investigating com.BugBazaar.ui.ProductAdapter$1::onClick (SEC-COMP-001)...
+14/10/2026 03:23:50 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+14/10/2026 03:24:19 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-COMP-001
+14/10/2026 03:24:19 PM | INFO     | investigator.py:investigate_leads_node:197 - [15/16] Investigating com.BugBazaar.ui.detectAppInt.checkroot::checkRootBeer (SEC-COMP-001)...
+14/10/2026 03:24:19 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+14/10/2026 03:24:37 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-COMP-001
+14/10/2026 03:24:37 PM | INFO     | investigator.py:investigate_leads_node:197 - [16/16] Investigating com.BugBazaar.ui.ContactsPack.ContactAdapter::openSmsApp (SEC-COMP-001)...
+14/10/2026 03:24:37 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+14/10/2026 03:24:56 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-COMP-001
+14/10/2026 03:24:56 PM | INFO     | investigator.py:investigate_leads_node:219 - Investigation complete. Generated 6 actionable findings.
+14/10/2026 04:28:26 PM | INFO     | scan.py:run_scan:40 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+14/10/2026 04:28:26 PM | INFO     | decompile.py:decompile_node:34 - Using existing decompiled directory: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1_decompiled
+14/10/2026 04:28:26 PM | INFO     | decompile.py:decompile_node:37 - Initializing Androguard cross-reference tables...
+14/10/2026 04:29:11 PM | INFO     | scan_secrets.py:scan_secrets_node:64 - Scanning for hardcoded secrets...
+14/10/2026 04:30:01 PM | INFO     | scan_secrets.py:scan_secrets_node:157 - Scan complete. Found 2 unique candidate secret(s).
+14/10/2026 04:30:01 PM | INFO     | triage_secrets.py:triage_secret_node:38 - Triaging 2 candidate secret(s) with LLM...
+14/10/2026 04:30:02 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+14/10/2026 04:30:05 PM | INFO     | analyze_manifest.py:analyze_manifest_node:32 - Parsing AndroidManifest.xml for components and flags...
+14/10/2026 04:30:05 PM | INFO     | analyze_manifest.py:analyze_manifest_node:158 - Manifest parsed: 64 components (21 exported), 15 permissions discovered.
+14/10/2026 04:30:05 PM | INFO     | sink_scanner.py:scan_sink_node:232 - Initiating sink scan across 3 smali roots...
+14/10/2026 04:30:06 PM | INFO     | sink_scanner.py:scan_sink_node:251 - Sink scan completed: 0 leads identified (0 in exported components).
+14/10/2026 04:30:06 PM | INFO     | investigator.py:investigate_leads_node:179 - No candidate leads available in state to investigate.
+14/10/2026 04:34:13 PM | INFO     | scan.py:run_scan:40 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+14/10/2026 04:34:13 PM | INFO     | decompile.py:decompile_node:34 - Using existing decompiled directory: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1_decompiled
+14/10/2026 04:34:13 PM | INFO     | decompile.py:decompile_node:37 - Initializing Androguard cross-reference tables...
+14/10/2026 04:34:36 PM | INFO     | scan_secrets.py:scan_secrets_node:64 - Scanning for hardcoded secrets...
+14/10/2026 04:35:10 PM | INFO     | scan_secrets.py:scan_secrets_node:157 - Scan complete. Found 2 unique candidate secret(s).
+14/10/2026 04:35:10 PM | INFO     | triage_secrets.py:triage_secret_node:38 - Triaging 2 candidate secret(s) with LLM...
+14/10/2026 04:35:11 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+14/10/2026 04:35:16 PM | INFO     | analyze_manifest.py:analyze_manifest_node:32 - Parsing AndroidManifest.xml for components and flags...
+14/10/2026 04:35:16 PM | INFO     | analyze_manifest.py:analyze_manifest_node:158 - Manifest parsed: 64 components (21 exported), 15 permissions discovered.
+14/10/2026 04:35:16 PM | INFO     | sink_scanner.py:scan_sink_node:231 - Initiating sink scan across 3 smali roots...
+14/10/2026 04:35:17 PM | INFO     | sink_scanner.py:scan_sink_node:250 - Sink scan completed: 16 leads identified (5 in exported components).
+14/10/2026 04:35:17 PM | INFO     | investigator.py:investigate_leads_node:182 - Starting audit loop across 16 candidate leads...
+14/10/2026 04:35:17 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+14/10/2026 04:35:27 PM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+14/10/2026 04:35:27 PM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+14/10/2026 04:35:27 PM | INFO     | investigator.py:investigate_leads_node:190 - Starting audit loop across 16 candidate leads...
+14/10/2026 04:35:27 PM | INFO     | investigator.py:investigate_leads_node:197 - [1/16] Investigating com.BugBazaar.ui.TermsAndConditionsActivity::setupwebview (SEC-WEB-001)...
+14/10/2026 04:35:27 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+14/10/2026 04:35:30 PM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+14/10/2026 04:36:02 PM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-WEB-001 (Severity: CRITICAL, Conf: 100%)
+14/10/2026 04:36:02 PM | INFO     | investigator.py:investigate_leads_node:197 - [2/16] Investigating com.BugBazaar.ui.Contact_us::onCreate (SEC-WEB-001)...
+14/10/2026 04:36:02 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+14/10/2026 04:36:21 PM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-WEB-001 (Severity: CRITICAL, Conf: 100%)
+14/10/2026 04:36:21 PM | INFO     | investigator.py:investigate_leads_node:197 - [3/16] Investigating com.BugBazaar.ui.Deeplink::setupwebview (SEC-WEB-001)...
+14/10/2026 04:36:21 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+14/10/2026 04:36:33 PM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-WEB-001 (Severity: HIGH, Conf: 90%)
+14/10/2026 04:36:33 PM | INFO     | investigator.py:investigate_leads_node:197 - [4/16] Investigating com.BugBazaar.ui.components.CustomBR::onReceive (SEC-COMP-001)...
+14/10/2026 04:36:33 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+14/10/2026 04:37:03 PM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-COMP-001 (Severity: MEDIUM, Conf: 90%)
+14/10/2026 04:37:03 PM | INFO     | investigator.py:investigate_leads_node:197 - [5/16] Investigating com.BugBazaar.ui.TermsAndConditionsActivity::startWebView (SEC-WEB-002)...
+14/10/2026 04:37:03 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security Add JavascriptInterface exposed on WebView.'
+14/10/2026 04:37:14 PM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-WEB-002 (Severity: HIGH, Conf: 90%)
+14/10/2026 04:37:14 PM | INFO     | investigator.py:investigate_leads_node:197 - [6/16] Investigating com.BugBazaar.utils.checkWorker::executeDynamicallyLoadedCode (SEC-EXEC-001)...
+14/10/2026 04:37:14 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Dynamic Code Loading Dynamic DEX loading via DexClassLoader.'
+14/10/2026 04:37:27 PM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-EXEC-001 (Severity: CRITICAL, Conf: 90%)
+14/10/2026 04:37:27 PM | INFO     | investigator.py:investigate_leads_node:197 - [7/16] Investigating com.BugBazaar.utils.AppInitializationManager::isFirstRun (SEC-STORE-001)...
+14/10/2026 04:37:27 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+14/10/2026 04:37:41 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+14/10/2026 04:37:41 PM | INFO     | investigator.py:investigate_leads_node:197 - [8/16] Investigating com.BugBazaar.utils.AppInitializationManager::markFirstRunDone (SEC-STORE-001)...
+14/10/2026 04:37:41 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+14/10/2026 04:37:55 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+14/10/2026 04:37:55 PM | INFO     | investigator.py:investigate_leads_node:197 - [9/16] Investigating com.BugBazaar.ui.SessionManager::<init> (SEC-STORE-001)...
+14/10/2026 04:37:55 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+14/10/2026 04:38:10 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+14/10/2026 04:38:10 PM | INFO     | investigator.py:investigate_leads_node:197 - [10/16] Investigating com.BugBazaar.controller.UserAuthSave::<init> (SEC-STORE-001)...
+14/10/2026 04:38:10 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+14/10/2026 04:38:25 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+14/10/2026 04:38:25 PM | INFO     | investigator.py:investigate_leads_node:197 - [11/16] Investigating com.BugBazaar.controller.UserAuthSave::<init> (SEC-STORE-001)...
+14/10/2026 04:38:25 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+14/10/2026 04:38:39 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+14/10/2026 04:38:39 PM | INFO     | investigator.py:investigate_leads_node:197 - [12/16] Investigating com.BugBazaar.ui.cart.addtimestamp::saveCartStartTime (SEC-STORE-001)...
+14/10/2026 04:38:39 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+14/10/2026 04:38:53 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+14/10/2026 04:38:53 PM | INFO     | investigator.py:investigate_leads_node:197 - [13/16] Investigating com.BugBazaar.utils.CustomDialog$1::onClick (SEC-COMP-001)...
+14/10/2026 04:38:53 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+14/10/2026 04:39:12 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-COMP-001
+14/10/2026 04:39:12 PM | INFO     | investigator.py:investigate_leads_node:197 - [14/16] Investigating com.BugBazaar.ui.ProductAdapter$1::onClick (SEC-COMP-001)...
+14/10/2026 04:39:12 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+14/10/2026 04:39:30 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-COMP-001
+14/10/2026 04:39:30 PM | INFO     | investigator.py:investigate_leads_node:197 - [15/16] Investigating com.BugBazaar.ui.detectAppInt.checkroot::checkRootBeer (SEC-COMP-001)...
+14/10/2026 04:39:30 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+14/10/2026 04:39:49 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-COMP-001
+14/10/2026 04:39:49 PM | INFO     | investigator.py:investigate_leads_node:197 - [16/16] Investigating com.BugBazaar.ui.ContactsPack.ContactAdapter::openSmsApp (SEC-COMP-001)...
+14/10/2026 04:39:49 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+14/10/2026 04:40:11 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-COMP-001
+14/10/2026 04:40:11 PM | INFO     | investigator.py:investigate_leads_node:219 - Investigation complete. Generated 6 actionable findings.
+15/10/2026 10:50:02 AM | INFO     | scan.py:run_scan:40 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+15/10/2026 10:50:02 AM | INFO     | decompile.py:decompile_node:34 - Using existing decompiled directory: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1_decompiled
+15/10/2026 10:50:02 AM | INFO     | decompile.py:decompile_node:37 - Initializing Androguard cross-reference tables...
+15/10/2026 10:51:03 AM | INFO     | scan_secrets.py:scan_secrets_node:64 - Scanning for hardcoded secrets...
+15/10/2026 10:51:48 AM | INFO     | scan_secrets.py:scan_secrets_node:157 - Scan complete. Found 2 unique candidate secret(s).
+15/10/2026 10:51:48 AM | INFO     | triage_secrets.py:triage_secret_node:38 - Triaging 2 candidate secret(s) with LLM...
+15/10/2026 10:51:48 AM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+15/10/2026 10:55:11 AM | INFO     | analyze_manifest.py:analyze_manifest_node:32 - Parsing AndroidManifest.xml for components and flags...
+15/10/2026 10:55:11 AM | INFO     | analyze_manifest.py:analyze_manifest_node:158 - Manifest parsed: 64 components (21 exported), 15 permissions discovered.
+15/10/2026 10:55:11 AM | INFO     | sink_scanner.py:scan_sink_node:231 - Initiating sink scan across 3 smali roots...
+15/10/2026 10:55:19 AM | INFO     | sink_scanner.py:scan_sink_node:250 - Sink scan completed: 16 leads identified (5 in exported components).
+15/10/2026 10:55:19 AM | INFO     | investigator.py:investigate_leads_node:182 - Starting audit loop across 16 candidate leads...
+15/10/2026 10:55:19 AM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+15/10/2026 10:55:37 AM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+15/10/2026 10:55:37 AM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+15/10/2026 10:55:37 AM | INFO     | investigator.py:investigate_leads_node:190 - Starting audit loop across 16 candidate leads...
+15/10/2026 10:55:37 AM | INFO     | investigator.py:investigate_leads_node:197 - [1/16] Investigating com.BugBazaar.ui.TermsAndConditionsActivity::setupwebview (SEC-WEB-001)...
+15/10/2026 10:55:37 AM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+15/10/2026 10:55:46 AM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+15/10/2026 10:56:19 AM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-WEB-001 (Severity: CRITICAL, Conf: 100%)
+15/10/2026 10:56:19 AM | INFO     | investigator.py:investigate_leads_node:197 - [2/16] Investigating com.BugBazaar.ui.Contact_us::onCreate (SEC-WEB-001)...
+15/10/2026 10:56:19 AM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+15/10/2026 10:56:31 AM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-WEB-001 (Severity: CRITICAL, Conf: 100%)
+15/10/2026 10:56:31 AM | INFO     | investigator.py:investigate_leads_node:197 - [3/16] Investigating com.BugBazaar.ui.Deeplink::setupwebview (SEC-WEB-001)...
+15/10/2026 10:56:31 AM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+15/10/2026 10:56:43 AM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-WEB-001 (Severity: HIGH, Conf: 90%)
+15/10/2026 10:56:43 AM | INFO     | investigator.py:investigate_leads_node:197 - [4/16] Investigating com.BugBazaar.ui.components.CustomBR::onReceive (SEC-COMP-001)...
+15/10/2026 10:56:43 AM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+15/10/2026 10:57:10 AM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-COMP-001 (Severity: MEDIUM, Conf: 90%)
+15/10/2026 10:57:10 AM | INFO     | investigator.py:investigate_leads_node:197 - [5/16] Investigating com.BugBazaar.ui.TermsAndConditionsActivity::startWebView (SEC-WEB-002)...
+15/10/2026 10:57:10 AM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security Add JavascriptInterface exposed on WebView.'
+15/10/2026 10:57:25 AM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-WEB-002 (Severity: HIGH, Conf: 90%)
+15/10/2026 10:57:25 AM | INFO     | investigator.py:investigate_leads_node:197 - [6/16] Investigating com.BugBazaar.utils.checkWorker::executeDynamicallyLoadedCode (SEC-EXEC-001)...
+15/10/2026 10:57:25 AM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Dynamic Code Loading Dynamic DEX loading via DexClassLoader.'
+15/10/2026 10:57:42 AM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-EXEC-001 (Severity: CRITICAL, Conf: 90%)
+15/10/2026 10:57:42 AM | INFO     | investigator.py:investigate_leads_node:197 - [7/16] Investigating com.BugBazaar.utils.AppInitializationManager::isFirstRun (SEC-STORE-001)...
+15/10/2026 10:57:42 AM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+15/10/2026 10:57:57 AM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+15/10/2026 10:57:57 AM | INFO     | investigator.py:investigate_leads_node:197 - [8/16] Investigating com.BugBazaar.utils.AppInitializationManager::markFirstRunDone (SEC-STORE-001)...
+15/10/2026 10:57:57 AM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+15/10/2026 10:58:12 AM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+15/10/2026 10:58:12 AM | INFO     | investigator.py:investigate_leads_node:197 - [9/16] Investigating com.BugBazaar.ui.SessionManager::<init> (SEC-STORE-001)...
+15/10/2026 10:58:13 AM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+15/10/2026 10:58:24 AM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+15/10/2026 10:58:24 AM | INFO     | investigator.py:investigate_leads_node:197 - [10/16] Investigating com.BugBazaar.controller.UserAuthSave::<init> (SEC-STORE-001)...
+15/10/2026 10:58:24 AM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+15/10/2026 10:58:56 AM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+15/10/2026 10:58:56 AM | INFO     | investigator.py:investigate_leads_node:197 - [11/16] Investigating com.BugBazaar.controller.UserAuthSave::<init> (SEC-STORE-001)...
+15/10/2026 10:58:56 AM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+15/10/2026 10:59:07 AM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+15/10/2026 10:59:07 AM | INFO     | investigator.py:investigate_leads_node:197 - [12/16] Investigating com.BugBazaar.ui.cart.addtimestamp::saveCartStartTime (SEC-STORE-001)...
+15/10/2026 10:59:07 AM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+15/10/2026 10:59:26 AM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+15/10/2026 10:59:26 AM | INFO     | investigator.py:investigate_leads_node:197 - [13/16] Investigating com.BugBazaar.utils.CustomDialog$1::onClick (SEC-COMP-001)...
+15/10/2026 10:59:26 AM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+15/10/2026 10:59:47 AM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-COMP-001
+15/10/2026 10:59:47 AM | INFO     | investigator.py:investigate_leads_node:197 - [14/16] Investigating com.BugBazaar.ui.ProductAdapter$1::onClick (SEC-COMP-001)...
+15/10/2026 10:59:47 AM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+15/10/2026 11:00:15 AM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-COMP-001
+15/10/2026 11:00:15 AM | INFO     | investigator.py:investigate_leads_node:197 - [15/16] Investigating com.BugBazaar.ui.detectAppInt.checkroot::checkRootBeer (SEC-COMP-001)...
+15/10/2026 11:00:15 AM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+15/10/2026 11:00:49 AM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-COMP-001
+15/10/2026 11:00:49 AM | INFO     | investigator.py:investigate_leads_node:197 - [16/16] Investigating com.BugBazaar.ui.ContactsPack.ContactAdapter::openSmsApp (SEC-COMP-001)...
+15/10/2026 11:00:49 AM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+15/10/2026 11:01:03 AM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-COMP-001
+15/10/2026 11:01:03 AM | INFO     | investigator.py:investigate_leads_node:219 - Investigation complete. Generated 6 actionable findings.
+15/10/2026 01:49:33 PM | INFO     | scan.py:run_scan:41 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+15/10/2026 02:27:46 PM | INFO     | scan.py:run_scan:41 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+15/10/2026 02:28:41 PM | INFO     | scan.py:run_scan:41 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+15/10/2026 02:28:41 PM | INFO     | decompile.py:decompile_node:34 - Using existing decompiled directory: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1_decompiled
+15/10/2026 02:28:41 PM | INFO     | decompile.py:decompile_node:37 - Initializing Androguard cross-reference tables...
+15/10/2026 02:29:33 PM | INFO     | scan_secrets.py:scan_secrets_node:64 - Scanning for hardcoded secrets...
+15/10/2026 02:30:31 PM | INFO     | scan_secrets.py:scan_secrets_node:157 - Scan complete. Found 2 unique candidate secret(s).
+15/10/2026 02:30:31 PM | INFO     | triage_secrets.py:triage_secret_node:38 - Triaging 2 candidate secret(s) with LLM...
+15/10/2026 02:30:32 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+15/10/2026 02:30:34 PM | INFO     | analyze_manifest.py:analyze_manifest_node:32 - Parsing AndroidManifest.xml for components and flags...
+15/10/2026 02:30:34 PM | INFO     | analyze_manifest.py:analyze_manifest_node:158 - Manifest parsed: 64 components (21 exported), 15 permissions discovered.
+15/10/2026 02:30:34 PM | INFO     | sink_scanner.py:scan_sink_node:231 - Initiating sink scan across 3 smali roots...
+15/10/2026 02:30:35 PM | INFO     | sink_scanner.py:scan_sink_node:250 - Sink scan completed: 16 leads identified (5 in exported components).
+15/10/2026 02:30:36 PM | INFO     | investigator.py:investigate_leads_node:182 - Starting audit loop across 16 candidate leads...
+15/10/2026 02:30:36 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+15/10/2026 02:31:08 PM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+15/10/2026 02:31:08 PM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+15/10/2026 02:31:08 PM | INFO     | investigator.py:investigate_leads_node:190 - Starting audit loop across 16 candidate leads...
+15/10/2026 02:31:08 PM | INFO     | investigator.py:investigate_leads_node:197 - [1/16] Investigating com.BugBazaar.ui.TermsAndConditionsActivity::setupwebview (SEC-WEB-001)...
+15/10/2026 02:31:08 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+15/10/2026 02:31:14 PM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+15/10/2026 02:32:10 PM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-WEB-001 (Severity: CRITICAL, Conf: 100%)
+15/10/2026 02:32:10 PM | INFO     | investigator.py:investigate_leads_node:197 - [2/16] Investigating com.BugBazaar.ui.Contact_us::onCreate (SEC-WEB-001)...
+15/10/2026 02:32:10 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+15/10/2026 02:32:23 PM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-WEB-001 (Severity: CRITICAL, Conf: 100%)
+15/10/2026 02:32:23 PM | INFO     | investigator.py:investigate_leads_node:197 - [3/16] Investigating com.BugBazaar.ui.Deeplink::setupwebview (SEC-WEB-001)...
+15/10/2026 02:32:23 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+15/10/2026 02:32:36 PM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-WEB-001 (Severity: HIGH, Conf: 90%)
+15/10/2026 02:32:36 PM | INFO     | investigator.py:investigate_leads_node:197 - [4/16] Investigating com.BugBazaar.ui.components.CustomBR::onReceive (SEC-COMP-001)...
+15/10/2026 02:32:36 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+15/10/2026 02:32:56 PM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-COMP-001 (Severity: MEDIUM, Conf: 90%)
+15/10/2026 02:32:56 PM | INFO     | investigator.py:investigate_leads_node:197 - [5/16] Investigating com.BugBazaar.ui.TermsAndConditionsActivity::startWebView (SEC-WEB-002)...
+15/10/2026 02:32:56 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security Add JavascriptInterface exposed on WebView.'
+15/10/2026 02:33:08 PM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-WEB-002 (Severity: HIGH, Conf: 90%)
+15/10/2026 02:33:08 PM | INFO     | investigator.py:investigate_leads_node:197 - [6/16] Investigating com.BugBazaar.utils.checkWorker::executeDynamicallyLoadedCode (SEC-EXEC-001)...
+15/10/2026 02:33:09 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Dynamic Code Loading Dynamic DEX loading via DexClassLoader.'
+15/10/2026 02:33:23 PM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-EXEC-001 (Severity: CRITICAL, Conf: 90%)
+15/10/2026 02:33:23 PM | INFO     | investigator.py:investigate_leads_node:197 - [7/16] Investigating com.BugBazaar.utils.AppInitializationManager::isFirstRun (SEC-STORE-001)...
+15/10/2026 02:33:23 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+15/10/2026 02:33:36 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+15/10/2026 02:33:36 PM | INFO     | investigator.py:investigate_leads_node:197 - [8/16] Investigating com.BugBazaar.utils.AppInitializationManager::markFirstRunDone (SEC-STORE-001)...
+15/10/2026 02:33:36 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+15/10/2026 02:33:57 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+15/10/2026 02:33:57 PM | INFO     | investigator.py:investigate_leads_node:197 - [9/16] Investigating com.BugBazaar.ui.SessionManager::<init> (SEC-STORE-001)...
+15/10/2026 02:33:57 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+15/10/2026 02:34:10 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+15/10/2026 02:34:10 PM | INFO     | investigator.py:investigate_leads_node:197 - [10/16] Investigating com.BugBazaar.controller.UserAuthSave::<init> (SEC-STORE-001)...
+15/10/2026 02:34:10 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+15/10/2026 02:34:30 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+15/10/2026 02:34:30 PM | INFO     | investigator.py:investigate_leads_node:197 - [11/16] Investigating com.BugBazaar.controller.UserAuthSave::<init> (SEC-STORE-001)...
+15/10/2026 02:34:30 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+15/10/2026 02:34:42 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+15/10/2026 02:34:42 PM | INFO     | investigator.py:investigate_leads_node:197 - [12/16] Investigating com.BugBazaar.ui.cart.addtimestamp::saveCartStartTime (SEC-STORE-001)...
+15/10/2026 02:34:42 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+15/10/2026 02:34:56 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+15/10/2026 02:34:56 PM | INFO     | investigator.py:investigate_leads_node:197 - [13/16] Investigating com.BugBazaar.utils.CustomDialog$1::onClick (SEC-COMP-001)...
+15/10/2026 02:34:56 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+15/10/2026 02:35:12 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-COMP-001
+15/10/2026 02:35:12 PM | INFO     | investigator.py:investigate_leads_node:197 - [14/16] Investigating com.BugBazaar.ui.ProductAdapter$1::onClick (SEC-COMP-001)...
+15/10/2026 02:35:13 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+15/10/2026 02:35:30 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-COMP-001
+15/10/2026 02:35:30 PM | INFO     | investigator.py:investigate_leads_node:197 - [15/16] Investigating com.BugBazaar.ui.detectAppInt.checkroot::checkRootBeer (SEC-COMP-001)...
+15/10/2026 02:35:30 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+15/10/2026 02:35:48 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-COMP-001
+15/10/2026 02:35:48 PM | INFO     | investigator.py:investigate_leads_node:197 - [16/16] Investigating com.BugBazaar.ui.ContactsPack.ContactAdapter::openSmsApp (SEC-COMP-001)...
+15/10/2026 02:35:48 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+15/10/2026 02:36:10 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-COMP-001
+15/10/2026 02:36:10 PM | INFO     | investigator.py:investigate_leads_node:219 - Investigation complete. Generated 6 actionable findings.
+15/10/2026 02:49:18 PM | INFO     | scan.py:run_scan:41 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+15/10/2026 03:01:33 PM | INFO     | scan.py:run_scan:40 - Initializing analysis for: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1.apk
+15/10/2026 03:01:33 PM | INFO     | decompile.py:decompile_node:34 - Using existing decompiled directory: /home/vivek/sample_apps/bugbazaar/BugBazaar_v1.2.1_decompiled
+15/10/2026 03:01:33 PM | INFO     | decompile.py:decompile_node:37 - Initializing Androguard cross-reference tables...
+15/10/2026 03:02:51 PM | INFO     | scan_secrets.py:scan_secrets_node:64 - Scanning for hardcoded secrets...
+15/10/2026 03:04:13 PM | INFO     | scan_secrets.py:scan_secrets_node:157 - Scan complete. Found 2 unique candidate secret(s).
+15/10/2026 03:04:13 PM | INFO     | triage_secrets.py:triage_secret_node:38 - Triaging 2 candidate secret(s) with LLM...
+15/10/2026 03:04:14 PM | INFO     | models.py:get_llm:21 - LLM initiated successfully: google_genai:gemini-3.1-flash-lite
+15/10/2026 03:04:16 PM | INFO     | analyze_manifest.py:analyze_manifest_node:32 - Parsing AndroidManifest.xml for components and flags...
+15/10/2026 03:04:16 PM | INFO     | analyze_manifest.py:analyze_manifest_node:158 - Manifest parsed: 64 components (21 exported), 15 permissions discovered.
+15/10/2026 03:04:17 PM | INFO     | sink_scanner.py:scan_sink_node:231 - Initiating sink scan across 3 smali roots...
+15/10/2026 03:04:20 PM | INFO     | sink_scanner.py:scan_sink_node:250 - Sink scan completed: 16 leads identified (5 in exported components).
+15/10/2026 03:04:20 PM | INFO     | investigator.py:investigate_leads_node:182 - Starting audit loop across 16 candidate leads...
+15/10/2026 03:04:20 PM | INFO     | models.py:load_hf_embedding_model:43 - Loading embedding model: google/embeddinggemma-300m
+15/10/2026 03:05:01 PM | INFO     | store.py:get_chroma_vector_store:92 - Vector store 'mastg_knowledge' initialized successfully.
+15/10/2026 03:05:01 PM | INFO     | bm25.py:load:65 - BM25 index loaded successfully.
+15/10/2026 03:05:01 PM | INFO     | investigator.py:investigate_leads_node:190 - Starting audit loop across 16 candidate leads...
+15/10/2026 03:05:01 PM | INFO     | investigator.py:investigate_leads_node:197 - [1/16] Investigating com.BugBazaar.ui.TermsAndConditionsActivity::setupwebview (SEC-WEB-001)...
+15/10/2026 03:05:01 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+15/10/2026 03:05:06 PM | INFO     | reranker.py:get_reranker:22 - Loading local CrossEncoder reranker from: /mnt/hgfs/huggingface/bge-reranker-base
+15/10/2026 03:06:08 PM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-WEB-001 (Severity: CRITICAL, Conf: 100%)
+15/10/2026 03:06:08 PM | INFO     | investigator.py:investigate_leads_node:197 - [2/16] Investigating com.BugBazaar.ui.Contact_us::onCreate (SEC-WEB-001)...
+15/10/2026 03:06:08 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+15/10/2026 03:06:28 PM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-WEB-001 (Severity: CRITICAL, Conf: 100%)
+15/10/2026 03:06:28 PM | INFO     | investigator.py:investigate_leads_node:197 - [3/16] Investigating com.BugBazaar.ui.Deeplink::setupwebview (SEC-WEB-001)...
+15/10/2026 03:06:28 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security WebView JavaScript execution enabled.'
+15/10/2026 03:06:57 PM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-WEB-001 (Severity: HIGH, Conf: 90%)
+15/10/2026 03:06:57 PM | INFO     | investigator.py:investigate_leads_node:197 - [4/16] Investigating com.BugBazaar.ui.components.CustomBR::onReceive (SEC-COMP-001)...
+15/10/2026 03:06:57 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+15/10/2026 03:07:41 PM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-COMP-001 (Severity: MEDIUM, Conf: 90%)
+15/10/2026 03:07:41 PM | INFO     | investigator.py:investigate_leads_node:197 - [5/16] Investigating com.BugBazaar.ui.TermsAndConditionsActivity::startWebView (SEC-WEB-002)...
+15/10/2026 03:07:41 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'WebView Security Add JavascriptInterface exposed on WebView.'
+15/10/2026 03:07:57 PM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-WEB-002 (Severity: HIGH, Conf: 90%)
+15/10/2026 03:07:57 PM | INFO     | investigator.py:investigate_leads_node:197 - [6/16] Investigating com.BugBazaar.utils.checkWorker::executeDynamicallyLoadedCode (SEC-EXEC-001)...
+15/10/2026 03:07:57 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Dynamic Code Loading Dynamic DEX loading via DexClassLoader.'
+15/10/2026 03:08:19 PM | INFO     | investigator.py:investigate_leads_node:208 - Result: [VULNERABLE] SEC-EXEC-001 (Severity: CRITICAL, Conf: 90%)
+15/10/2026 03:08:19 PM | INFO     | investigator.py:investigate_leads_node:197 - [7/16] Investigating com.BugBazaar.utils.AppInitializationManager::isFirstRun (SEC-STORE-001)...
+15/10/2026 03:08:19 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+15/10/2026 03:08:42 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+15/10/2026 03:08:42 PM | INFO     | investigator.py:investigate_leads_node:197 - [8/16] Investigating com.BugBazaar.utils.AppInitializationManager::markFirstRunDone (SEC-STORE-001)...
+15/10/2026 03:08:42 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+15/10/2026 03:09:01 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+15/10/2026 03:09:01 PM | INFO     | investigator.py:investigate_leads_node:197 - [9/16] Investigating com.BugBazaar.ui.SessionManager::<init> (SEC-STORE-001)...
+15/10/2026 03:09:01 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+15/10/2026 03:09:19 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+15/10/2026 03:09:19 PM | INFO     | investigator.py:investigate_leads_node:197 - [10/16] Investigating com.BugBazaar.controller.UserAuthSave::<init> (SEC-STORE-001)...
+15/10/2026 03:09:19 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+15/10/2026 03:09:40 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+15/10/2026 03:09:40 PM | INFO     | investigator.py:investigate_leads_node:197 - [11/16] Investigating com.BugBazaar.controller.UserAuthSave::<init> (SEC-STORE-001)...
+15/10/2026 03:09:40 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+15/10/2026 03:09:58 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+15/10/2026 03:09:58 PM | INFO     | investigator.py:investigate_leads_node:197 - [12/16] Investigating com.BugBazaar.ui.cart.addtimestamp::saveCartStartTime (SEC-STORE-001)...
+15/10/2026 03:09:58 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Insecure Storage SharedPreferences opened with world-readable permissions.'
+15/10/2026 03:10:14 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-STORE-001
+15/10/2026 03:10:14 PM | INFO     | investigator.py:investigate_leads_node:197 - [13/16] Investigating com.BugBazaar.utils.CustomDialog$1::onClick (SEC-COMP-001)...
+15/10/2026 03:10:14 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+15/10/2026 03:10:43 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-COMP-001
+15/10/2026 03:10:43 PM | INFO     | investigator.py:investigate_leads_node:197 - [14/16] Investigating com.BugBazaar.ui.ProductAdapter$1::onClick (SEC-COMP-001)...
+15/10/2026 03:10:43 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+15/10/2026 03:11:03 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-COMP-001
+15/10/2026 03:11:03 PM | INFO     | investigator.py:investigate_leads_node:197 - [15/16] Investigating com.BugBazaar.ui.detectAppInt.checkroot::checkRootBeer (SEC-COMP-001)...
+15/10/2026 03:11:03 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+15/10/2026 03:11:28 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-COMP-001
+15/10/2026 03:11:28 PM | INFO     | investigator.py:investigate_leads_node:197 - [16/16] Investigating com.BugBazaar.ui.ContactsPack.ContactAdapter::openSmsApp (SEC-COMP-001)...
+15/10/2026 03:11:28 PM | INFO     | retriever.py:retrieve:55 - Executing hybrid retrieval for: 'Component Hijacking / Redirection Activity launch sink (potential intent redirection target).'
+15/10/2026 03:11:47 PM | DEBUG    | investigator.py:investigate_leads_node:214 - Lead classified as FALSE_POSITIVE: SEC-COMP-001
+15/10/2026 03:11:47 PM | INFO     | investigator.py:investigate_leads_node:219 - Investigation complete. Generated 6 actionable findings.
