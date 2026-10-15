@@ -41,24 +41,96 @@ def _smali_to_java_class(smali_type) -> str:
     return clean.replace("/", ".")
 
 
+# def scan_smali_file(
+#     file_path: Path,
+#     rules: list[SinkRule],
+#     exported_map: dict[str, bool],
+#     app_package: str | None = None,
+# ) -> list[dict[str, Any]]:
+#     """Scans an individual Smali file against active rules."""
+
+#     findings = []
+#     current_class = "Unknown"
+#     current_method = "Unknown"
+
+#     try:
+#         content = file_path.read_text(encoding="utf-8", errors="ignore").splitlines()
+#     except OSError:
+#         return []
+
+#     # Quick check: extract class from top lines first
+#     for line in content[:15]:
+#         stripped = line.strip()
+#         if stripped.startswith(".class"):
+#             m = CLASS_PATTERN.search(stripped)
+#             if m:
+#                 current_class = _smali_to_java_class(m.group(1))
+#                 break
+
+#     # If the class is outside our application package, bail out immediately
+#     if app_package and not is_in_scope(current_class, app_package):
+#         return []
+
+#     for line_num, line in enumerate(content, start=1):
+#         stripped = line.strip()
+
+#         # Update class context
+#         if stripped.startswith(".class"):
+#             m = CLASS_PATTERN.search(stripped)
+#             if m:
+#                 current_class = _smali_to_java_class(m.group(1))
+#             continue
+
+#         # Update method context
+#         if stripped.startswith(".method"):
+#             m = METHOD_PATTERN.search(stripped)
+#             if m:
+#                 current_method = m.group(1)
+#             continue
+
+#         if stripped.startswith(".end method"):
+#             current_method = "Unknown"
+#             continue
+
+#         # Match rules against instruction
+#         for rule in rules:
+#             if re.search(rule.pattern, stripped):
+#                 is_exported = exported_map.get(current_class, False)
+
+#                 findings.append(
+#                     {
+#                         "rule_id": rule.rule_id,
+#                         "category": rule.category.value,
+#                         "description": rule.description,
+#                         "class_name": current_class,
+#                         "method_name": current_method,
+#                         "file_path": str(file_path),
+#                         "line_number": line_num,
+#                         "code_snippet": stripped,
+#                         "is_exported": is_exported,
+#                         "is_intrinsic": rule.is_intrinsic,
+#                         "confidence": rule.confidence,
+#                     }
+#                 )
+#     return findings
+
+
 def scan_smali_file(
     file_path: Path,
     rules: list[SinkRule],
     exported_map: dict[str, bool],
     app_package: str | None = None,
+    context_window_lines: int = 15,
 ) -> list[dict[str, Any]]:
-    """Scans an individual Smali file against active rules."""
-
     findings = []
-    current_class = "Unknown"
-    current_method = "Unknown"
+    current_class = "UNKNOWN"
+    current_method = "UNKNOWN"
 
     try:
         content = file_path.read_text(encoding="utf-8", errors="ignore").splitlines()
     except OSError:
         return []
 
-    # Quick check: extract class from top lines first
     for line in content[:15]:
         stripped = line.strip()
         if stripped.startswith(".class"):
@@ -67,35 +139,50 @@ def scan_smali_file(
                 current_class = _smali_to_java_class(m.group(1))
                 break
 
-    # If the class is outside our application package, bail out immediately
     if app_package and not is_in_scope(current_class, app_package):
         return []
 
+    method_start_idx = 0
+
     for line_num, line in enumerate(content, start=1):
+        idx = line_num - 1
         stripped = line.strip()
 
-        # Update class context
         if stripped.startswith(".class"):
             m = CLASS_PATTERN.search(stripped)
             if m:
                 current_class = _smali_to_java_class(m.group(1))
             continue
 
-        # Update method context
         if stripped.startswith(".method"):
             m = METHOD_PATTERN.search(stripped)
             if m:
                 current_method = m.group(1)
+                method_start_idx = idx
             continue
 
         if stripped.startswith(".end method"):
-            current_method = "Unknown"
+            current_method = "UNKNOWN"
             continue
 
-        # Match rules against instruction
         for rule in rules:
             if re.search(rule.pattern, stripped):
                 is_exported = exported_map.get(current_class, False)
+                start_win = max(method_start_idx, idx - context_window_lines)
+                end_win = min(len(content), idx + context_window_lines + 1)
+                context_snippet = "\n".join(content[start_win:end_win])
+
+                register_constants = []
+
+                for prev_line in content[method_start_idx:idx]:
+                    if "const-string" in prev_line:
+                        parts = prev_line.split(",")
+                        if len(parts) >= 2:
+                            str_val = (
+                                prev_line.split('"')[1] if '"' in prev_line else None
+                            )
+                            if str_val:
+                                register_constants.append(str_val)
 
                 findings.append(
                     {
@@ -107,11 +194,14 @@ def scan_smali_file(
                         "file_path": str(file_path),
                         "line_number": line_num,
                         "code_snippet": stripped,
+                        "code_context": context_snippet,
+                        "register_constants": register_constants,
                         "is_exported": is_exported,
                         "is_intrinsic": rule.is_intrinsic,
                         "confidence": rule.confidence,
                     }
                 )
+
     return findings
 
 
