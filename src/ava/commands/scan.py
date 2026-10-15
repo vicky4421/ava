@@ -76,6 +76,7 @@ async def run_scan(target: Path, fresh: bool = False):
 
             # 3. Vulnerability Audit Findings
             raw_findings = result.get("audit_findings", [])
+
             if raw_findings:
                 # Convert dicts back to schema instances if deserialized as dicts
                 findings: list[LeadAuditResult] = [
