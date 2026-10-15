@@ -11,6 +11,8 @@ from ava.agent.state import AgentState
 from ava.config.logger import get_logger
 from ava.rag.retriever import HybridMASTGRetriever
 from ava.resources.models import get_llm
+from ava.resources.runtime import get_analysis_context
+from ava.tools.callgraph import trace_upstream_callers
 from ava.tools.code_extractor import extract_method_context
 
 # silent gemini warnings
@@ -79,7 +81,7 @@ USER_TEMPLATE = """### Candidate Lead Metadata
 
 ### Extracted Bytecode Context
 ```smali
-{code_context}
+{code_context}```
 
 ### Relevant MASTG Security Standards
 {mastg_context}
@@ -89,17 +91,48 @@ Provide your structured assessment.
 
 
 def _investigate_single_lead(
-    lead: dict[str, Any], retriever: HybridMASTGRetriever, llm: Any
+    lead: dict[str, Any],
+    retriever: HybridMASTGRetriever,
+    llm: Any,
+    dx: Any | None = None,
 ) -> LeadAuditResult:
     """Audits a single candidate lead using code context and RAG guidance."""
 
     # 1. Extract bytecode surrounding the sink line
-    code_context = extract_method_context(
+    sink_context = extract_method_context(
         file_path=lead["file_path"],
         target_line=lead["line_number"],
     ) or lead.get("code_snippet", "")
 
-    # 2. Query Hybrid RAG for security context
+    # 2. Use dx to trace upstream callers
+    caller_sections: list[str] = []
+    if dx is not None:
+        callers = trace_upstream_callers(
+            dx=dx,
+            target_class_smali=lead.get("class_name", ""),
+            target_method=lead.get("method_name", ""),
+        )
+        for caller in callers:
+            tag = (
+                "[Framework Lifecycle Entry Point]"
+                if caller["is_lifecycle_entry"]
+                else "[Internal Caller]"
+            )
+            caller_sections.append(
+                f"### Caller: {caller['class_name']}->{caller['method_name']} {tag}\n"
+                f"```smali\n{caller['instructions']}\n```"
+            )
+
+    # 3. Combine upstream callers with the target sink
+    if caller_sections:
+        caller_sections.append(
+            f"### Target Sink Method:\n```smali\n{sink_context}\n```"
+        )
+        combined_code_context = "\n\n".join(caller_sections)
+    else:
+        combined_code_context = sink_context
+
+    # 4. Query Hybrid RAG for security context
     rag_query = f"{lead['category']} {lead['description']}"
     rag_docs = retriever.retrieve(rag_query, top_k=2)
     mastg_context = (
@@ -126,7 +159,7 @@ def _investigate_single_lead(
             "class_name": lead.get("class_name", ""),
             "method_name": lead.get("method_name", ""),
             "is_exported": lead.get("is_exported", False),
-            "code_context": code_context,
+            "code_context": combined_code_context,
             "mastg_context": mastg_context,
         }
     )
@@ -140,8 +173,7 @@ def investigate_leads_node(state: AgentState) -> dict[str, Any]:
     """LangGraph Node: Processes in-scope candidate leads and accumulates verified audit findings."""
 
     candidate_leads = state.get("candidate_leads", [])
-
-    llm = get_llm()
+    target_apk = state.get("target_apk", "")
 
     if not candidate_leads:
         logger.info("No candidate leads available in state to investigate.")
@@ -149,7 +181,13 @@ def investigate_leads_node(state: AgentState) -> dict[str, Any]:
 
     logger.info(f"Starting audit loop across {len(candidate_leads)} candidate leads...")
 
+    llm = get_llm()
     retriever = HybridMASTGRetriever()
+
+    # Retrieve cached Androguard Analysis context once for the entire batch
+    dx = get_analysis_context(target_apk) if target_apk else None
+
+    logger.info(f"Starting audit loop across {len(candidate_leads)} candidate leads...")
 
     verified_findings: list[LeadAuditResult] = []
 
@@ -162,7 +200,7 @@ def investigate_leads_node(state: AgentState) -> dict[str, Any]:
 
         try:
             result = _investigate_single_lead(
-                lead=dict(lead), retriever=retriever, llm=llm
+                lead=dict(lead), retriever=retriever, llm=llm, dx=dx
             )
 
             # Accumulate actionable findings
