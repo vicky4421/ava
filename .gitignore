@@ -1,13 +1,53 @@
-# Python-generated files
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[oc]
+*$py.class
+
+# Distribution / packaging 
 build/
 dist/
 wheels/
 *.egg-info
+.installed.cfg
+*.egg
 
 # Virtual environments
 .env
-.env/
+.env.*
+.venv/
+env/
 venv/
+ENV/
+project_structure.txt
+
+# Local Environment Variables & Secrets
+*.env
+!example.env
+!.env.example
+
+# Testing, Analysis & Static Artifacts (Crucial for AVA)
+*.apk
+*.dex
+*.jar
+*.apks
+/output/
+/reports/
+/decompile_cache/
+/androguard_cache/
+
+# Databases & Checkpoint Storage
+*.db
+*.sqlite
+*.sqlite3
+postgres_data/
+
+# IDEs & Editor configurations
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS artifacts
+.DS_Store
+Thumbs.db
 project_structure.txt
