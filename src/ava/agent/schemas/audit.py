@@ -2,6 +2,7 @@
 # Date: 12-10-2026
 
 from enum import StrEnum
+from typing import Any
 
 from pydantic import BaseModel, Field
 
@@ -46,7 +47,7 @@ class ReachabilityStatus(StrEnum):
     INDETERMINATE = "INDETERMINATE"  # Cannot determine solely from local bytecode slice
 
 
-class TaintDataFlow(BaseModel):
+class LLMInferredDataFlow(BaseModel):
     model_config = {"extra": "ignore"}
 
     source: str = Field(
@@ -71,6 +72,11 @@ class TaintDataFlow(BaseModel):
     )
 
 
+class VerfifiedReachablePath(BaseModel):
+    callers: list[dict[str, Any]]
+    reached_exported_entry: bool
+
+
 class LeadAuditResult(BaseModel):
     model_config = {"extra": "ignore"}
 
@@ -89,7 +95,8 @@ class LeadAuditResult(BaseModel):
     reachability: ReachabilityStatus = Field(
         description="Assessment of whether external untrusted input can reach this sink."
     )
-    data_flow: TaintDataFlow | None = Field(
+    verified_path: VerfifiedReachablePath | None = None
+    data_flow: LLMInferredDataFlow | None = Field(
         default=None,
         description="Taint tracking analysis tracing source-to-sink propagation.",
     )
@@ -103,42 +110,3 @@ class LeadAuditResult(BaseModel):
     remediation: str = Field(
         description="Actionable fix based on security best practices"
     )
-    payload_file: PayloadFile | None = Field(
-        default=None,
-        description="Structured payload file artifact required to execute the exploit.",
-    )
-    poc_commands: list[str] | None = Field(
-        default=None,
-        description="List of clean, single-line adb or shell commands to execute        sequentially (e.g., ['adb push exploit.html /sdcard/', 'adb shell am start ...'])",
-    )
-
-    @property
-    def poc_exploitation(self) -> str | None:
-        """Backward-compatible helper property that formats payload and commands cleanly for UI/CLI rendering."""
-
-        if not self.poc_commands and not self.payload_file:
-            return None
-
-        steps = []
-        step_num = 1
-
-        if (
-            self.payload_file
-            and self.payload_file.filename
-            and self.payload_file.content
-            and self.payload_file.content.strip()
-        ):
-            steps.append(
-                f"{step_num}. Create payload file `{self.payload_file.filename}`:\n"
-                f"cat << 'EOF' > {self.payload_file.filename}\n"
-                f"{self.payload_file.content.strip()}\n"
-                f"EOF"
-            )
-            step_num += 1
-
-        if self.poc_commands:
-            for cmd in self.poc_commands:
-                steps.append(f"{step_num}. Run command:\n{cmd}")
-                step_num += 1
-
-        return "\n\n".join(steps)
