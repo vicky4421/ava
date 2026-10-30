@@ -2,8 +2,6 @@ from typing import Any, TypedDict
 
 from langgraph.graph import MessagesState
 
-from ava.agent.schemas.audit import LeadAuditResult
-
 
 class SecretOccurrence(TypedDict):
     file: str
@@ -45,4 +43,4 @@ class AgentState(MessagesState):
 
     # Vulnerability audit pipeline
     candidate_leads: list[CandidateLead]
-    audit_findings: list[LeadAuditResult]
+    audit_findings: list[dict[str, Any]]
