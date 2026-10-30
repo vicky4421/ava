@@ -14,12 +14,21 @@ LIFECYCLE_ENTRY_POINTS = {
 
 
 def trace_upstream_callers(
-    dx: Any, target_class_smali: str, target_method: str, max_depth: int = 1
+    dx: Any,
+    target_class_smali: str,
+    target_method: str,
+    exported_components: set[str],
+    max_depth: int = 3,
+    _visited: set[tuple[str, str]] | None = None,
+    _depth: int = 0,
 ) -> list[dict[str, Any]]:
     """Discovers upstream caller methods for a target sink method using Androguard xrefs.
 
     target_class_smali format: 'Lcom/BugBazaar/ui/Deeplink;'
     """
+
+    if _visited is None:
+        _visited = set()
 
     callers = []
 
@@ -27,6 +36,12 @@ def trace_upstream_callers(
     formatted_class = target_class_smali.strip()
     if not formatted_class.startswith("L"):
         formatted_class = f"L{formatted_class.replace('.', '/')};"
+
+    key = (formatted_class, target_method)
+
+    if key in _visited or _depth >= max_depth:
+        return []
+    _visited.add(key)
 
     matched_methods = dx.find_methods(
         classname=formatted_class,
@@ -55,7 +70,13 @@ def trace_upstream_callers(
                 ),
             )
 
-            is_entry = caller_name in LIFECYCLE_ENTRY_POINTS
+            # Normalize smali class name (Lcom/x/Y;) to dotted (com.x.Y) for comparison
+            normalized_class = caller_class.strip("L;").replace("/", ".")
+
+            is_entry = (
+                caller_name in LIFECYCLE_ENTRY_POINTS
+                and normalized_class in exported_components
+            )
 
             # Extract Smali instructions from the caller method
             instructions: list[str] = []
@@ -78,6 +99,20 @@ def trace_upstream_callers(
                     "instructions": "\n".join(instructions),
                 }
             )
+
+            # Recurse upward unless this caller is already a lifecycle entry point
+            if not is_entry:
+                callers.extend(
+                    trace_upstream_callers(
+                        dx,
+                        caller_class,
+                        caller_name,
+                        exported_components,
+                        max_depth,
+                        _visited,
+                        _depth=_depth + 1,
+                    )
+                )
 
     # Sort so lifecycle entry points appear first
     return sorted(callers, key=lambda c: 0 if c["is_lifecycle_entry"] else 1)
