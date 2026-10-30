@@ -79,11 +79,9 @@ async def run_scan(target: Path, fresh: bool = False):
 
             if raw_findings:
                 # Convert dicts back to schema instances if deserialized as dicts
-                findings: list[LeadAuditResult] = [
-                    f
-                    if isinstance(f, LeadAuditResult)
-                    else LeadAuditResult.model_validate(f)
-                    for f in raw_findings
+                findings = [
+                    LeadAuditResult.model_validate(f) if isinstance(f, dict) else f
+                    for f in result.get("audit_findings", [])
                 ]
 
                 # Executive Summary Table
