@@ -6,6 +6,7 @@ from typing import Any, cast
 
 from langchain_core.prompts import ChatPromptTemplate
 
+from ava.agent.nodes.analyze_manifest import get_exported_entry_points
 from ava.agent.schemas.audit import LeadAuditResult, TriageVerdict
 from ava.agent.state import AgentState
 from ava.config.logger import get_logger
@@ -39,11 +40,6 @@ You are an expert Android Security Auditor. Your task is to analyze a candidate 
 
 Evaluate the provided Smali/Java bytecode against the supplied MASTG (OWASP) security guidance and component exposure metadata. Determine whether the implementation represents a true vulnerability, an insecure configuration, or a false positive.
 
- Evaluation Rules: 
- 1. Examine if dangerous settings (e.g., JavaScript execution, universal file access, world-readable flags) are enabled with constant values (0x1 / true). 
- 2. If this is a sink requiring input, determine whether external parameters reach it without validation. 
- 3. Be precise: do not classify standard framework operations or benign defaults as vulnerabilities. 
- 4. Extract the exact evidence code snippet showing the vulnerable API call and identify the standard CWE ID (e.g., 'CWE-749')
 
  Evaluate candidate leads discovered during static analysis by performing rigorous taint and reachability analysis.
  Evaluation Criteria:
@@ -60,16 +56,6 @@ Evaluate the provided Smali/Java bytecode against the supplied MASTG (OWASP) sec
 4. False Positive Pruning:
    - Classify as FALSE_POSITIVE if the sink is guarded by rigorous input validation, is dead code, or requires unattainable local privileges.
 
- Exploitation Requirements (When Verdict is VULNERABLE): If the verdict is VULNERABLE, you MUST generate structured proof-of-concept (POC) artifacts:
- 1. Payload file generation (`payload_file`):
-    - ONLY populate `payload_file` if a dedicated file artifact is strictly required to execute the attack (e.g., .html for webviews, .xml for XXE, or .json payload files.)
-    - Do NOT generate python wrapper scripts (e.g. exploit.py using os.system) if a direct adb command is sufficient. Set `payload_file` to null in those cases.
-    - You MUST populate `payload_file.content` with complete, non-empty code.
-    - For WebViews: Always include complete HTML markup (`<!DOCTYPE html><html><body><script>...</script></body></html>`) and write stolen data directory to the DOM (`document.body.innerText = data`). Never use `alert()`, as Android WebViews suppress alerts by default.
-2. Command Sequence (`poc_commands`):
-    - Provide a list of clean, single-line terminal commands to execute sequentially.
-    - If `payload_file` is generated include the command to push or execute it (e.g., `adb push exploit.html /sdcard/` or `python exploit.py`)
-    - For direct triggers (BroadcastReceivers, Activities, Services), provide the direct `adb shell am start`, `adb shell am broadcast`, or `adb shell am startservice` command.
 """
 
 USER_TEMPLATE = """### Candidate Lead Metadata
@@ -94,6 +80,7 @@ def _investigate_single_lead(
     lead: dict[str, Any],
     retriever: HybridMASTGRetriever,
     llm: Any,
+    exported_components: set[str],
     dx: Any | None = None,
 ) -> LeadAuditResult:
     """Audits a single candidate lead using code context and RAG guidance."""
@@ -108,6 +95,7 @@ def _investigate_single_lead(
     caller_sections: list[str] = []
     if dx is not None:
         callers = trace_upstream_callers(
+            exported_components=exported_components,
             dx=dx,
             target_class_smali=lead.get("class_name", ""),
             target_method=lead.get("method_name", ""),
@@ -179,17 +167,17 @@ def investigate_leads_node(state: AgentState) -> dict[str, Any]:
         logger.info("No candidate leads available in state to investigate.")
         return {"audit_findings": []}
 
-    logger.info(f"Starting audit loop across {len(candidate_leads)} candidate leads...")
-
     llm = get_llm()
     retriever = HybridMASTGRetriever()
 
     # Retrieve cached Androguard Analysis context once for the entire batch
     dx = get_analysis_context(target_apk) if target_apk else None
 
+    exported_components = {comp["name"] for comp in get_exported_entry_points(state)}
+
     logger.info(f"Starting audit loop across {len(candidate_leads)} candidate leads...")
 
-    verified_findings: list[LeadAuditResult] = []
+    verified_findings: list[dict[str, Any]] = []
 
     for idx, lead in enumerate(candidate_leads, start=1):
         rule = lead.get("rule_id", "UNKNOWN")
@@ -200,7 +188,11 @@ def investigate_leads_node(state: AgentState) -> dict[str, Any]:
 
         try:
             result = _investigate_single_lead(
-                lead=dict(lead), retriever=retriever, llm=llm, dx=dx
+                lead=dict(lead),
+                retriever=retriever,
+                llm=llm,
+                dx=dx,
+                exported_components=exported_components,
             )
 
             # Accumulate actionable findings
@@ -209,7 +201,7 @@ def investigate_leads_node(state: AgentState) -> dict[str, Any]:
                     f"Result: [{result.verdict.value}] {result.rule_id} "
                     f"(Severity: {result.severity.value}, Conf: {result.confidence * 100:.0f}%)"
                 )
-                verified_findings.append(result)
+                verified_findings.append(result.model_dump())
             else:
                 logger.debug(f"Lead classified as FALSE_POSITIVE: {result.rule_id}")
 
