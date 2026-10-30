@@ -141,45 +141,6 @@ def render_lead_detail_card(result: LeadAuditResult, console: Console) -> None:
     # Remediation
     card_sections.append(f"\n[bold cyan]Remediation:[/]\n{result.remediation.strip()}")
 
-    # Payload File Artifact (if present)
-    if (
-        result.payload_file
-        and result.payload_file.filename
-        and result.payload_file.content
-    ):
-        card_sections.append(
-            f"\n[bold cyan]Payload Artifact: `{result.payload_file.filename}`[/]"
-        )
-        lexer = (
-            "html"
-            if result.payload_file.filename.endswith((".html", ".htm"))
-            else "xml"
-            if result.payload_file.filename.endswith(".xml")
-            else "text"
-        )
-        payload_syntax = Syntax(
-            result.payload_file.content.strip(),
-            lexer,
-            theme="monokai",
-            line_numbers=True,
-            word_wrap=True,
-        )
-        card_sections.append(payload_syntax)
-
-    # Verification Commands
-    if result.poc_commands:
-        card_sections.append("\n[bold cyan]Verification Commands:[/]")
-        # Format commands sequentially as executable shell lines
-        joined_commands = "\n".join(cmd.strip() for cmd in result.poc_commands)
-        cmd_syntax = Syntax(
-            joined_commands,
-            "bash",
-            theme="monokai",
-            line_numbers=False,
-            word_wrap=True,
-        )
-        card_sections.append(cmd_syntax)
-
     # Bundle all sections into a single renderable group
     content_group = Group(*card_sections)
 
